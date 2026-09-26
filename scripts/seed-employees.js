@@ -39,13 +39,6 @@ const newEmployees = [
   // retired (status = 0, never deleted) by the pass at the end of seedEmployees.
   { branch: 'DXB', dept: 'Admin', doj: null, name: 'Ismail', username: 'Ismail', role: 'CEO' },
   { branch: 'DXB', dept: 'Admin', doj: null, name: 'Shahzad', username: 'Shahzad', role: 'CEO' },
-  { branch: 'DXB', dept: 'Admin', doj: null, name: 'Ujjwal Sahani', username: 'Ujjwal', role: 'Director of Sales' },
-  { branch: 'DXB', dept: 'Admin', doj: null, name: 'Mehak Riaz', username: 'Mehak', role: 'Team Leader' },
-  { branch: 'DXB', dept: 'Admin', doj: null, name: 'Ashutosh Pandey', username: 'Ashutosh', role: 'Area Manager' },
-  { branch: 'DXB', dept: 'Sales', doj: null, name: 'Aaron Paul', username: 'Aaron', role: 'Senior Immigration Advisor', manager: 'Mehak' },
-  { branch: 'DXB', dept: 'Sales', doj: null, name: 'Rubeca Francis', username: 'Rubeca', role: 'Senior Immigration Advisor', manager: 'Mehak' },
-  { branch: 'DXB', dept: 'Sales', doj: null, name: 'Harpreet Kaur', username: 'Harpreet', role: 'Immigration Advisor', manager: 'Ashutosh' },
-  { branch: 'DXB', dept: 'Sales', doj: null, name: 'Sonu', username: 'Sonu', role: 'Immigration Advisor', manager: 'Ashutosh' },
   { branch: 'DXB', dept: 'HR', doj: null, name: 'HR', username: 'HR', role: 'HR' },
   { branch: 'DXB', dept: 'Accounts', doj: null, name: 'Accounts', username: 'Accounts', role: 'Accounts' },
   { branch: 'DXB', dept: 'Operations', doj: null, name: 'Operations', username: 'Operations', role: 'Operations' },

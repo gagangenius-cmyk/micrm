@@ -27,8 +27,15 @@ const REGION_SEEDS = ['UAE'];
 // country/location (see src/lib/branchCurrency.ts, which matches
 // crm_currency.country against crm_branch.branch) rather than a city name,
 // so it must line up with the crm_currency rows in seed-currency.js.
+//
+// `id` is explicit on purpose. Dubai SZR is branch 2 in production, and
+// migrations/20260916_dubai_only_branch.sql ("DELETE ... WHERE id != 2") and
+// several code paths assume that. Left to AUTO_INCREMENT, a freshly created
+// database takes the counter baked into database-schema.sql (crm_branch is
+// AUTO_INCREMENT=6) and Dubai came out as id 6, after which re-running the
+// migrations would have deleted the real branch and its fees.
 const BRANCH_SEEDS = [
-  { name: 'Dubai SZR', ar_name: 'دبي', branch: 'United Arab Emirates', region: 'UAE', abbrv: 'DXB SZR',
+  { id: 2, name: 'Dubai SZR', ar_name: 'دبي', branch: 'United Arab Emirates', region: 'UAE', abbrv: 'DXB SZR',
     address: '606, Latifa Towers, Trade Center 1, Sheikh Zayed Road, Dubai, UAE', ar_address: '606، أبراج لطيفة، المركز التجاري 1، شارع الشيخ زايد، دبي، الإمارات العربية المتحدة',
     email: 'info@navigatorglobals.com', mobile: '+971559476936', website: 'https://navigatorglobals.com' },
 ];
@@ -68,9 +75,9 @@ async function seedBranches(connection) {
       continue;
     }
     await connection.query(
-      `INSERT INTO crm_branch (name, ar_name, branch, region, abbrv, address, ar_address, email, mobile, status, website)
-       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 1, ?)`,
-      [b.name, b.ar_name, b.branch, regionIds[b.region], b.abbrv, b.address, b.ar_address, b.email, b.mobile, b.website]
+      `INSERT INTO crm_branch (id, name, ar_name, branch, region, abbrv, address, ar_address, email, mobile, status, website)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1, ?)`,
+      [b.id, b.name, b.ar_name, b.branch, regionIds[b.region], b.abbrv, b.address, b.ar_address, b.email, b.mobile, b.website]
     );
     created++;
   }
