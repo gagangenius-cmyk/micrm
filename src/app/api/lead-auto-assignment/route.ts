@@ -17,6 +17,24 @@ interface LeadAttributes {
   service_interest: number | null;
 }
 
+// The engine (leadAutoAssignment.ts) throws this when a branch has no eligible employee. Every
+// other caller (lead intake, lead creation, the lead-pool sweep, web-to-leads) treats it as a
+// normal "nobody available right now" outcome and matches on this same text.
+const NO_EMPLOYEES_MESSAGE = 'No active employees are available';
+const isNoEmployeesError = (error: unknown): error is Error =>
+  error instanceof Error && error.message.includes(NO_EMPLOYEES_MESSAGE);
+
+// Branch ids are data, not constants: a database's Dubai branch is not necessarily id 1 or 2 (it
+// is 6 on a freshly seeded crm_mi). So never invent one. Use the first real candidate: the
+// explicit request value, then the lead's own branch, then the caller's branch.
+const pickBranchId = (...candidates: unknown[]): number | null => {
+  for (const candidate of candidates) {
+    const id = Number(candidate);
+    if (Number.isInteger(id) && id > 0) return id;
+  }
+  return null;
+};
+
 async function loadLeadAttributes(leadId: number | null): Promise<LeadAttributes | null> {
   if (!leadId) return null;
   const [row] = await sequelize.query<LeadAttributes>(
@@ -33,16 +51,30 @@ export async function GET(request: NextRequest) {
     const { searchParams } = new URL(request.url);
     const leadId = Number.parseInt(searchParams.get('leadId') || '', 10) || null;
     const leadAttrs = await loadLeadAttributes(leadId);
-    const branchId = Number.parseInt(searchParams.get('branchId') || '', 10) || leadAttrs?.branch || 1;
+    const branchId = pickBranchId(searchParams.get('branchId'), leadAttrs?.branch, auth.branch);
+    if (!branchId) {
+      return NextResponse.json(
+        { success: false, error: 'branchId is required: none was given, the lead has no branch, and your account has no branch' },
+        { status: 400 }
+      );
+    }
+
     // This is a preview for the admin UI. Do not consume a turn until a lead is actually assigned.
-    const assignment = await previewLeadAssignment({
-      branchId,
-      sourceId: leadAttrs?.market_source ?? null,
-      priority: leadAttrs?.priority ?? null,
-      leadQuality: leadAttrs?.lead_quality ?? null,
-      countryInterestId: leadAttrs?.country_interest ?? null,
-      serviceInterestId: leadAttrs?.service_interest ?? null,
-    });
+    let assignment;
+    try {
+      assignment = await previewLeadAssignment({
+        branchId,
+        sourceId: leadAttrs?.market_source ?? null,
+        priority: leadAttrs?.priority ?? null,
+        leadQuality: leadAttrs?.lead_quality ?? null,
+        countryInterestId: leadAttrs?.country_interest ?? null,
+        serviceInterestId: leadAttrs?.service_interest ?? null,
+      });
+    } catch (error) {
+      // An empty branch is a valid answer to "who would get this lead?", not a server fault.
+      if (!isNoEmployeesError(error)) throw error;
+      return NextResponse.json({ success: true, assignment: null, candidates: [], branchId, message: error.message });
+    }
 
     await Promise.all([ensureEmployeeAttendanceTable(), HRService.ensureAttendanceRecordTable()]);
     const candidates = await sequelize.query(
@@ -85,7 +117,6 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
     const leadId = Number.parseInt(String(body.leadId || ''), 10);
-    const branchId = Number.parseInt(String(body.branchId || body.branch || '1'), 10);
 
     if (!leadId) {
       return NextResponse.json(
@@ -98,6 +129,14 @@ export async function POST(request: NextRequest) {
       'SELECT assignTo, branch FROM crm_forum_leads WHERE id = :leadId LIMIT 1',
       { replacements: { leadId }, type: QueryTypes.SELECT }
     );
+
+    const branchId = pickBranchId(body.branchId, body.branch, existing?.branch, auth.branch);
+    if (!branchId) {
+      return NextResponse.json(
+        { success: false, error: 'branchId is required: none was given, the lead has no branch, and your account has no branch' },
+        { status: 400 }
+      );
+    }
 
     // FOE/Branch Manager may only auto-assign within their own branch - the
     // caller-supplied branchId (used to be trusted outright) and the lead's
@@ -153,6 +192,10 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({ success: true, assignment });
   } catch (error: any) {
+    if (isNoEmployeesError(error)) {
+      // Nobody eligible in the branch: a conflict with the current state, not a server fault.
+      return NextResponse.json({ success: false, error: error.message }, { status: 409 });
+    }
     console.error('Lead auto-assignment update failed:', error);
     return NextResponse.json(
       { success: false, error: error.message || 'Failed to auto assign lead' },
