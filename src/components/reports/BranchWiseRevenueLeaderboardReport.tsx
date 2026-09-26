@@ -92,8 +92,8 @@ export default function BranchWiseRevenueLeaderboardReport() {
       {
         label: 'Revenue',
         data: branchData.slice(0, 5).map(d => d.revenue),
-        backgroundColor: ['#FFD700', '#C0C0C0', '#CD7F32', '#3B82F6', '#10B981'],
-        borderColor: ['#FFD700', '#C0C0C0', '#CD7F32', '#3B82F6', '#10B981'],
+        backgroundColor: ['#FFD700', '#C0C0C0', '#CD7F32', '#5B78B3', '#10B981'],
+        borderColor: ['#FFD700', '#C0C0C0', '#CD7F32', '#5B78B3', '#10B981'],
         borderWidth: 2,
       }
     ]
@@ -105,8 +105,8 @@ export default function BranchWiseRevenueLeaderboardReport() {
       {
         label: 'Target Achievement (%)',
         data: branchData.slice(0, 5).map(d => d.achievement),
-        backgroundColor: ['#3B82F6', '#10B981', '#F59E0B', '#EF4444', '#8B5CF6'],
-        borderColor: ['#3B82F6', '#10B981', '#F59E0B', '#EF4444', '#8B5CF6'],
+        backgroundColor: ['#5B78B3', '#10B981', '#BE9349', '#EF4444', '#8B5CF6'],
+        borderColor: ['#5B78B3', '#10B981', '#BE9349', '#EF4444', '#8B5CF6'],
         borderWidth: 2,
       }
     ]
@@ -118,8 +118,8 @@ export default function BranchWiseRevenueLeaderboardReport() {
       {
         label: 'Regional Revenue',
         data: regionalData.map(d => d.totalRevenue),
-        backgroundColor: '#3B82F6',
-        borderColor: '#3B82F6',
+        backgroundColor: '#5B78B3',
+        borderColor: '#5B78B3',
         borderWidth: 2,
       }
     ]

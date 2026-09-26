@@ -316,7 +316,7 @@ export default function CalendarView() {
 
   const getEventBgColor = (type: Event['type']) => {
     switch (type) {
-      case 'appointment': return '#3B82F6';
+      case 'appointment': return '#5B78B3';
       case 'reminder': return '#10B981';
       case 'meeting': return '#6366F1';
       case 'task': return '#8B5CF6';

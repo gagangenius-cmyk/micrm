@@ -66,8 +66,8 @@ export default function ApprovedRetainedAmountReport() {
       {
         label: 'Approved Amount',
         data: monthlyData.map(d => d.approved),
-        backgroundColor: '#3B82F6',
-        borderColor: '#3B82F6',
+        backgroundColor: '#5B78B3',
+        borderColor: '#5B78B3',
         borderWidth: 1,
       },
       {
@@ -80,8 +80,8 @@ export default function ApprovedRetainedAmountReport() {
       {
         label: 'Pending Amount',
         data: monthlyData.map(d => d.pending),
-        backgroundColor: '#F59E0B',
-        borderColor: '#F59E0B',
+        backgroundColor: '#BE9349',
+        borderColor: '#BE9349',
         borderWidth: 1,
       }
     ]
@@ -108,7 +108,7 @@ export default function ApprovedRetainedAmountReport() {
       {
         label: 'Total Approved',
         data: branchData.map(d => d.totalApproved),
-        backgroundColor: '#3B82F6',
+        backgroundColor: '#5B78B3',
       },
       {
         label: 'Total Retained',

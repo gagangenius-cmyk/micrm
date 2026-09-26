@@ -164,14 +164,14 @@ const formatDate = (value?: string | null) => {
 };
 
 const workLocationColors: Record<string, string> = {
-  Onshore: '#2563eb',
+  Onshore: '#2C4A8A',
   Offshore: '#f97316',
   'Remote-UAE': '#0d9488',
   'GCC-Branch': '#7c3aed',
 };
 
 const employmentTypeColors = {
-  fullTime: '#2563eb',
+  fullTime: '#2C4A8A',
   contract: '#0d9488',
   freelance: '#f97316',
   partTime: '#7c3aed',

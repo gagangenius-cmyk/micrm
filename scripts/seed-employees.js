@@ -35,7 +35,10 @@ const DEPT = { Sales: 1, Operations: 2, Admin: 3, HR: 4, Accounts: 5 };
 // of these designations were given a specific branch - correct this per
 // person if any of them should sit in a different branch.
 const newEmployees = [
-  { branch: 'DXB', dept: 'Admin', doj: null, name: 'Roopa Kainth', username: 'Roopa', role: 'CEO' },
+  // Exactly two CEOs. Anyone previously seeded as CEO who isn't listed here is
+  // retired (status = 0, never deleted) by the pass at the end of seedEmployees.
+  { branch: 'DXB', dept: 'Admin', doj: null, name: 'Ismail', username: 'Ismail', role: 'CEO' },
+  { branch: 'DXB', dept: 'Admin', doj: null, name: 'Shahzad', username: 'Shahzad', role: 'CEO' },
   { branch: 'DXB', dept: 'Admin', doj: null, name: 'Ujjwal Sahani', username: 'Ujjwal', role: 'Director of Sales' },
   { branch: 'DXB', dept: 'Admin', doj: null, name: 'Mehak Riaz', username: 'Mehak', role: 'Team Leader' },
   { branch: 'DXB', dept: 'Admin', doj: null, name: 'Ashutosh Pandey', username: 'Ashutosh', role: 'Area Manager' },
@@ -63,8 +66,21 @@ async function resolveLookups(connection) {
   return { branchIds, roleIds };
 }
 
+// The seeded initial password is the username, so a new account must be forced
+// to change it at first sign-in. The column comes from
+// migrations/20260803_employee_must_change_password.sql; on a database that
+// predates it the flag is simply skipped (this script also runs standalone).
+async function hasMustChangePassword(connection) {
+  const [rows] = await connection.query(
+    `SELECT COUNT(*) AS count FROM INFORMATION_SCHEMA.COLUMNS
+     WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'crm_employee' AND COLUMN_NAME = 'must_change_password'`
+  );
+  return Number(rows[0].count) > 0;
+}
+
 async function seedEmployees(connection) {
   const { branchIds, roleIds } = await resolveLookups(connection);
+  const forcePasswordChange = await hasMustChangePassword(connection);
   const credentials = [];
   const idByUsername = new Map();
   let created = 0;
@@ -106,6 +122,9 @@ async function seedEmployees(connection) {
       )`,
       [emp.name, roleId, branchId, emp.username, hashed, deptId, emp.doj]
     );
+    if (forcePasswordChange) {
+      await connection.query('UPDATE crm_employee SET must_change_password = 1 WHERE id = ?', [result.insertId]);
+    }
     idByUsername.set(emp.username, result.insertId);
     credentials.push({ id: result.insertId, name: emp.name, username: emp.username, password });
     created++;

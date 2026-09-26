@@ -92,7 +92,7 @@ export default function ComprehensiveAnalyticsReport() {
       {
         label: 'Revenue',
         data: analyticsData.map(d => d.revenue),
-        borderColor: '#3B82F6',
+        borderColor: '#5B78B3',
         backgroundColor: 'rgba(59, 130, 246, 0.1)',
         borderWidth: 2,
         fill: true,
@@ -129,7 +129,7 @@ export default function ComprehensiveAnalyticsReport() {
       {
         label: 'Count',
         data: funnelData.map(d => d.count),
-        backgroundColor: ['#3B82F6', '#10B981', '#F59E0B', '#EF4444', '#8B5CF6', '#6B7280']
+        backgroundColor: ['#5B78B3', '#10B981', '#BE9349', '#EF4444', '#8B5CF6', '#6B7280']
       }
     ]
   };

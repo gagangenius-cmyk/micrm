@@ -272,7 +272,7 @@ export default function CounselorDashboard() {
                 <Tooltip />
                 <Legend />
                 <Bar dataKey="Last Month" fill="#cbd5e1" radius={[4, 4, 0, 0]} />
-                <Bar dataKey="This Month" fill="#2563eb" radius={[4, 4, 0, 0]} />
+                <Bar dataKey="This Month" fill="#2C4A8A" radius={[4, 4, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </div>

@@ -58,7 +58,7 @@ interface MomComparison {
 const fmtAed = (v: number) => `AED ${Number(v || 0).toLocaleString('en', { maximumFractionDigits: 0 })}`;
 
 // Fixed categorical order, reused across both trend charts — never cycled.
-const SERIES_COLOR = { leads: '#2563eb', won: '#16a34a', revenue: '#2563eb' };
+const SERIES_COLOR = { leads: '#2C4A8A', won: '#16a34a', revenue: '#2C4A8A' };
 
 function DeltaBadge({ value, suffix = '%', invert = false }: { value: number; suffix?: string; invert?: boolean }) {
   const positive = invert ? value < 0 : value > 0;
@@ -377,7 +377,7 @@ export default function SalesPerformanceReportPage() {
 
           {/* Lead pipeline breakdowns — where leads currently sit, and where they came from. */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-            <BreakdownCard title="Leads by Status" rows={leadStatusBreakdown} barColor="#2563eb" />
+            <BreakdownCard title="Leads by Status" rows={leadStatusBreakdown} barColor="#2C4A8A" />
             <BreakdownCard title="Leads by Source" rows={leadSourceBreakdown} barColor="#7c3aed" />
           </div>
 

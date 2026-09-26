@@ -76,7 +76,7 @@ export async function startEnrollment(employeeId: number, accountName: string): 
   );
   return {
     secret,
-    otpauthUrl: buildOtpAuthUrl({ secret, accountName, issuer: 'Global Navigator LLC FZ' }),
+    otpauthUrl: buildOtpAuthUrl({ secret, accountName, issuer: 'Migrantly' }),
   };
 }
 

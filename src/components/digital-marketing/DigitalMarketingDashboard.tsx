@@ -38,7 +38,7 @@ const emptyMeta: MetaStats = {
   todayCount: 0, weekCount: 0, delivered: 0, failed: 0, pending: 0, campaignCounts: [],
 };
 
-const COLORS = ['#2563eb', '#16a34a', '#f59e0b', '#dc2626', '#7c3aed', '#0891b2', '#db2777'];
+const COLORS = ['#2C4A8A', '#16a34a', '#BE9349', '#dc2626', '#7c3aed', '#0891b2', '#db2777'];
 
 function StatTile({
   label, value, icon: Icon, accent,
@@ -169,7 +169,7 @@ export default function DigitalMarketingDashboard() {
                 <XAxis type="number" tick={{ fontSize: 12 }} allowDecimals={false} />
                 <YAxis type="category" dataKey="name" width={110} tick={{ fontSize: 11 }} />
                 <Tooltip />
-                <Bar dataKey="value" fill="#2563eb" radius={[0, 4, 4, 0]} />
+                <Bar dataKey="value" fill="#2C4A8A" radius={[0, 4, 4, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </div>

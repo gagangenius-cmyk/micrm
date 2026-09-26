@@ -28,20 +28,24 @@ any retired role can be reinstated by flipping its status back to 1.
 
 | Name | Username | Role | Reports to |
 |---|---|---|---|
-| Roopa Kainth | `Roopa` | CEO | — |
+| Ismail | `Ismail` | CEO | — |
+| Shahzad | `Shahzad` | CEO | — |
 | Ujjwal Sahani | `Ujjwal` | Director of Sales | — |
 | Mehak Riaz | `Mehak` | Team Leader | — |
 | Ashutosh Pandey | `Ashutosh` | Area Manager | — |
 | Aaron Paul | `Aaron` | Senior Immigration Advisor | Mehak Riaz |
 | Rubeca Francis | `Rubeca` | Senior Immigration Advisor | Mehak Riaz |
 | Harpreet Kaur | `Harpreet` | Immigration Advisor | Ashutosh Pandey |
+| Sonu | `Sonu` | Immigration Advisor | Ashutosh Pandey |
 | HR | `HR` | HR | — |
 | Accounts | `Accounts` | Accounts | — |
 | Operations | `Operations` | Operations | — |
 
 Every account's password equals its username (this codebase's existing
-convention - see `scripts/seed-employees.js`), e.g. `Roopa` / `Roopa`. **All
-10 were seeded into the Dubai SZR branch** since no branch was specified per
+convention - see `scripts/seed-employees.js`), e.g. `Ismail` / `Ismail`; each new
+account is flagged `must_change_password` so the initial password has to be
+replaced at first sign-in. **All
+12 were seeded into the Dubai SZR branch** since no branch was specified per
 person - move anyone to a different branch from Employees admin if that's
 wrong for them.
 

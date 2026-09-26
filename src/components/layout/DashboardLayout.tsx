@@ -423,49 +423,50 @@ const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
       {/* Mobile sidebar backdrop */}
       {sidebarOpen && (
         <div
-          className="fixed inset-0 z-40 lg:hidden bg-[rgba(20,33,61,0.68)]"
+          className="fixed inset-0 z-40 lg:hidden bg-[rgba(4,9,21,0.72)] backdrop-blur-[2px]"
           onClick={() => setSidebarOpen(false)}
         />
       )}
 
       {/* Sidebar */}
       <div className={`
-        fixed lg:sticky lg:top-0 lg:h-screen inset-y-0 left-0 z-50 w-72 bg-white border-r border-[var(--cmg-border)] shadow-lg lg:shadow-sm transform transition-transform duration-300 ease-in-out
+        mi-sidebar fixed lg:sticky lg:top-0 lg:h-screen inset-y-0 left-0 z-50 w-72 shadow-2xl lg:shadow-none transform transition-transform duration-300 ease-in-out
         ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}
         lg:translate-x-0 flex flex-col
       `}>
-        <div className="dmc-one-brand flex items-center justify-between px-5 py-4 border-b border-[var(--cmg-border)] flex-shrink-0">
-          <div className="flex min-w-0 items-center">
-            <div className="dmc-one-logo-frame relative h-14 w-24 flex-shrink-0">
-              <Image src="/logo.png" alt="Global Navigator" fill sizes="96px" className="object-contain" priority />
-            </div>
-            <div className="ml-3 min-w-0">
-              <span className="dmc-one-title block leading-tight">Global Navigator</span>
-              <span className="dmc-one-subtitle mt-1 inline-flex items-center rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider">
-                CRM
-              </span>
-            </div>
-          </div>
+        <div className="mi-sidebar-brand flex items-center justify-between px-5 py-5 flex-shrink-0">
+          <Link href="/admin" aria-label="Migrantly CRM home" className="flex min-w-0 flex-col items-start gap-2 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--dmc-gold-bright)]/60">
+            <Image
+              src="/logo-light.png"
+              alt="Migrantly.ae - Your world, unlocked."
+              width={1413}
+              height={757}
+              sizes="176px"
+              priority
+              className="h-auto w-44"
+            />
+          </Link>
           <button
             onClick={() => setSidebarOpen(false)}
-            className="lg:hidden text-[var(--cmg-muted)] hover:text-[var(--cmg-blue)]"
+            aria-label="Close menu"
+            className="lg:hidden rounded-md p-1 text-[#C9D3EA] hover:bg-white/10 hover:text-white"
           >
             <X className="w-6 h-6" />
           </button>
         </div>
 
-        <nav className="flex-1 sidebar-nav py-5 px-3 overflow-y-auto">
-          <div className="space-y-7">
+        <nav className="flex-1 sidebar-nav py-4 px-3 overflow-y-auto">
+          <div className="space-y-6">
             {navigationGroups.map((group) => {
               const permittedItems = group.items.filter(item => filteredNavigation.includes(item));
               if (permittedItems.length === 0) return null;
 
               return (
               <div key={group.title}>
-                <h3 className="px-3 text-xs font-semibold text-[var(--cmg-muted)] uppercase mb-2">
+                <h3 className="mi-nav-group px-3 text-[10.5px] font-semibold uppercase mb-2">
                   {group.title}
                 </h3>
-                <div className="space-y-1">
+                <div className="space-y-0.5">
                   {permittedItems.map((item) => {
                     const isActive = pathname === item.href || pathname.startsWith(`${item.href}/`);
                     const Icon = item.icon;
@@ -474,15 +475,10 @@ const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
                       <Link
                         key={item.name}
                         href={item.href}
-                        className={`
-                          w-full flex items-center px-3 py-2.5 text-sm font-medium rounded-md transition-all duration-150 border-l-[3px]
-                          ${isActive
-                            ? 'bg-[var(--cmg-blue-soft)] text-[var(--cmg-blue)] border-[var(--dmc-gold)] font-semibold'
-                            : 'text-[var(--cmg-muted)] border-transparent hover:bg-[#FBF0E9] hover:text-[var(--cmg-ink)] hover:translate-x-0.5'
-                          }
-                        `}
+                        aria-current={isActive ? 'page' : undefined}
+                        className="mi-nav-link w-full flex items-center px-3 py-2.5 text-sm font-medium rounded-lg transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--dmc-gold-bright)]/60"
                       >
-                        <Icon className="w-5 h-5 mr-3" />
+                        <Icon className="w-[18px] h-[18px] mr-3 shrink-0 opacity-90" />
                         <span className="flex-1">{item.name}</span>
                         {Boolean(item.badge) && (
                           <span className="ml-2 inline-flex min-w-[1.25rem] items-center justify-center rounded-full bg-red-500 px-1.5 py-0.5 text-[10px] font-bold leading-none text-white">
@@ -500,14 +496,16 @@ const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
         </nav>
 
         {/* User info in sidebar */}
-        <div className="p-4 border-t border-[var(--cmg-border)] flex-shrink-0 bg-[#FEFAF7]">
+        <div className="flex-shrink-0 border-t border-white/[0.07] bg-black/[0.16] p-4">
           <div className="flex items-center">
-            <div className="w-9 h-9 bg-[var(--cmg-blue-soft)] rounded-full flex items-center justify-center">
-              <User className="w-5 h-5 text-[var(--cmg-blue)]" />
+            <div className="flex h-10 w-10 items-center justify-center rounded-full p-[2px] bg-[image:var(--mi-gold-gradient)]">
+              <div className="flex h-full w-full items-center justify-center rounded-full bg-[var(--dmc-green-dark)]">
+                <User className="h-5 w-5 text-[var(--dmc-gold-bright)]" />
+              </div>
             </div>
-            <div className="ml-3 flex-1">
-              <p className="text-sm font-semibold text-[var(--cmg-ink)]">{user?.name}</p>
-              <p className="text-xs text-[var(--cmg-muted)] capitalize">{user?.role}</p>
+            <div className="ml-3 min-w-0 flex-1">
+              <p className="truncate text-sm font-semibold text-white">{user?.name}</p>
+              <p className="truncate text-xs capitalize text-[var(--dmc-gold-bright)]/80">{user?.roleName || user?.role}</p>
             </div>
           </div>
         </div>
@@ -516,11 +514,12 @@ const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
       {/* Main content */}
       <div className="flex-1 flex flex-col min-w-0 min-h-0">
         {/* Top navigation */}
-        <header className="relative z-40 bg-white/95 backdrop-blur shadow-sm border-b border-[var(--cmg-border)] flex-shrink-0">
+        <header className="relative z-40 bg-white/90 backdrop-blur-md border-b border-[var(--cmg-border)] flex-shrink-0 after:pointer-events-none after:absolute after:inset-x-0 after:-bottom-px after:h-px after:bg-[linear-gradient(90deg,transparent,rgba(190,147,73,0.55)_18%,rgba(238,202,125,0.75)_50%,rgba(190,147,73,0.55)_82%,transparent)]">
           <div className="flex items-center justify-between h-16 px-4 sm:px-6 lg:px-8">
-            <div className="flex items-center">
+            <div className="flex min-w-0 flex-1 items-center">
               <button
                 onClick={() => setSidebarOpen(true)}
+                aria-label="Open menu"
                 className="lg:hidden text-[var(--cmg-muted)] hover:text-[var(--cmg-blue)]"
               >
                 <Menu className="w-6 h-6" />
@@ -545,7 +544,7 @@ const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
                         openSearchResult(globalSearchResults[0].href);
                       }
                     }}
-                    className="w-full pl-10 pr-4 py-2 border border-transparent bg-[var(--cmg-blue-soft)]/60 rounded-full transition-all duration-150 focus:bg-white focus:border-[var(--cmg-border)] focus:shadow-sm cmg-focus text-[var(--cmg-ink)] placeholder:text-[var(--cmg-muted)]"
+                    className="w-full pl-10 pr-4 py-2 border border-transparent bg-[var(--cmg-blue-soft)]/70 rounded-full transition-all duration-150 focus:bg-white focus:border-[var(--dmc-gold)]/60 focus:shadow-sm cmg-focus text-[var(--cmg-ink)] placeholder:text-[var(--cmg-muted)]"
                   />
                   {globalSearchOpen && globalSearchQuery.trim().length >= 2 && (
                     <div className="absolute left-0 right-0 top-full mt-2 z-50 overflow-hidden rounded-md border border-[var(--cmg-border)] bg-white shadow-lg">
@@ -561,7 +560,7 @@ const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
                           type="button"
                           onMouseDown={(event) => event.preventDefault()}
                           onClick={() => openSearchResult(result.href)}
-                          className="block w-full px-4 py-3 text-left hover:bg-[#FBF0E9]"
+                          className="block w-full px-4 py-3 text-left hover:bg-[var(--cmg-blue-soft)]"
                         >
                           <div className="flex items-center justify-between gap-3">
                             <span className="truncate text-sm font-medium text-[var(--cmg-ink)]">{result.title}</span>
@@ -600,10 +599,12 @@ const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
               <div className="relative">
                 <button
                   onClick={() => setProfileDropdownOpen(!profileDropdownOpen)}
-                  className="flex items-center text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-[var(--cmg-blue)]"
+                  className="flex items-center text-sm rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--dmc-gold)]"
                 >
-                  <div className="w-8 h-8 bg-[var(--cmg-blue-soft)] rounded-full flex items-center justify-center">
-                    <User className="w-5 h-5 text-[var(--cmg-blue)]" />
+                  <div className="flex h-9 w-9 items-center justify-center rounded-full p-[2px] bg-[image:var(--mi-gold-gradient)]">
+                    <div className="flex h-full w-full items-center justify-center rounded-full bg-[var(--dmc-green-dark)]">
+                      <User className="h-[18px] w-[18px] text-[var(--dmc-gold-bright)]" />
+                    </div>
                   </div>
                   <span className="ml-2 hidden md:block text-[var(--cmg-ink)]">{user?.name}</span>
                   <ChevronDown className="ml-2 w-4 h-4 text-[var(--cmg-muted)]" />

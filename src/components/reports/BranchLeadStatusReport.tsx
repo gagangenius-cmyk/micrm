@@ -82,8 +82,8 @@ export default function BranchLeadStatusReport() {
   };
 
   const statusData = [
-    { name: 'Active', value: data.reduce((sum, d) => sum + d.active, 0), color: '#3B82F6' },
-    { name: 'On Hold', value: data.reduce((sum, d) => sum + d.onHold, 0), color: '#F59E0B' },
+    { name: 'Active', value: data.reduce((sum, d) => sum + d.active, 0), color: '#5B78B3' },
+    { name: 'On Hold', value: data.reduce((sum, d) => sum + d.onHold, 0), color: '#BE9349' },
     { name: 'Visa Granted', value: data.reduce((sum, d) => sum + d.visaGranted, 0), color: '#10B981' },
     { name: 'Closed', value: data.reduce((sum, d) => sum + d.closed, 0), color: '#6B7280' }
   ];
@@ -96,13 +96,13 @@ export default function BranchLeadStatusReport() {
       {
         label: 'Active',
         data: filteredData.map(d => d.active),
-        backgroundColor: '#3B82F6',
+        backgroundColor: '#5B78B3',
         stack: 'Stack 0',
       },
       {
         label: 'On Hold',
         data: filteredData.map(d => d.onHold),
-        backgroundColor: '#F59E0B',
+        backgroundColor: '#BE9349',
         stack: 'Stack 0',
       },
       {

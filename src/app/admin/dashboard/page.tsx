@@ -436,7 +436,7 @@ export default function Dashboard() {
                         <XAxis dataKey="month" fontSize={12} />
                         <YAxis allowDecimals={false} fontSize={12} />
                         <Tooltip />
-                        <Area type="monotone" dataKey="count" name="Leads" stroke="#2563eb" fill="#93c5fd" />
+                        <Area type="monotone" dataKey="count" name="Leads" stroke="#2C4A8A" fill="#C4D0E8" />
                       </AreaChart>
                     </ResponsiveContainer>
                   )}

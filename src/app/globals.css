@@ -1,32 +1,296 @@
 @import "tailwindcss";
 
+/* ══════════════════════════════════════════════════════════════════════
+   Migrantly design system
+   ──────────────────────────────────────────────────────────────────────
+   Every colour below was sampled from the Migrantly logo (public/logo.png):
+     Wordmark navy      →  #0F1D3D
+     Arc / arrow gold   →  gradient  #9D6C2D → #C29B58 → #EECA7D
+   Navy carries structure (sidebar, primary actions, text); gold is the
+   accent - active states, focus, highlights, "unlocked" moments.
+
+   Tailwind's `blue`, `indigo`, `sky`, `amber` and all the grays are remapped
+   in @theme below, so the ~9,000 existing utility classes (bg-blue-600,
+   text-gray-500, border-gray-200 …) pick the brand up with no per-file edits.
+   ══════════════════════════════════════════════════════════════════════ */
+
+@theme {
+  /* ── Brand navy (logo wordmark) ─────────────────────────────────── */
+  --color-navy-50:  #F3F6FB;
+  --color-navy-100: #E2E8F5;
+  --color-navy-200: #C4D0E8;
+  --color-navy-300: #93A9D3;
+  --color-navy-400: #5B78B3;
+  --color-navy-500: #2C4A8A;
+  --color-navy-600: #14264F;
+  --color-navy-700: #0F1D3D;
+  --color-navy-800: #0B1631;
+  --color-navy-900: #070E22;
+  --color-navy-950: #040915;
+
+  /* ── Brand gold (logo arc + arrow) ──────────────────────────────── */
+  --color-gold-50:  #FBF7EC;
+  --color-gold-100: #F6EBCB;
+  --color-gold-200: #EFD9A0;
+  --color-gold-300: #EECA7D;
+  --color-gold-400: #D9B267;
+  --color-gold-500: #BE9349;
+  --color-gold-600: #A47A33;
+  --color-gold-700: #86602A;
+  --color-gold-800: #684A22;
+  --color-gold-900: #48331A;
+  --color-gold-950: #2A1D0E;
+
+  /* ── Tailwind families re-pointed at the brand ──────────────────── */
+  --color-blue-50:  #F3F6FB;
+  --color-blue-100: #E2E8F5;
+  --color-blue-200: #C4D0E8;
+  --color-blue-300: #93A9D3;
+  --color-blue-400: #5B78B3;
+  --color-blue-500: #2C4A8A;
+  --color-blue-600: #14264F;
+  --color-blue-700: #0F1D3D;
+  --color-blue-800: #0B1631;
+  --color-blue-900: #070E22;
+  --color-blue-950: #040915;
+
+  --color-indigo-50:  #F3F6FB;
+  --color-indigo-100: #E2E8F5;
+  --color-indigo-200: #C4D0E8;
+  --color-indigo-300: #93A9D3;
+  --color-indigo-400: #5B78B3;
+  --color-indigo-500: #2C4A8A;
+  --color-indigo-600: #14264F;
+  --color-indigo-700: #0F1D3D;
+  --color-indigo-800: #0B1631;
+  --color-indigo-900: #070E22;
+  --color-indigo-950: #040915;
+
+  /* sky reads as "info": a lighter, cooler slice of the navy scale */
+  --color-sky-50:  #F1F6FC;
+  --color-sky-100: #E0EBF8;
+  --color-sky-200: #C2D6EF;
+  --color-sky-300: #92B5E0;
+  --color-sky-400: #5E8FCB;
+  --color-sky-500: #3A6FB2;
+  --color-sky-600: #2B5691;
+  --color-sky-700: #244572;
+  --color-sky-800: #1F3859;
+  --color-sky-900: #182B45;
+  --color-sky-950: #0F1B2D;
+
+  /* amber = the warning colour; brand gold stands in for it */
+  --color-amber-50:  #FBF7EC;
+  --color-amber-100: #F6EBCB;
+  --color-amber-200: #EFD9A0;
+  --color-amber-300: #E6C377;
+  --color-amber-400: #D2A85A;
+  --color-amber-500: #BE9349;
+  --color-amber-600: #A47A33;
+  --color-amber-700: #86602A;
+  --color-amber-800: #684A22;
+  --color-amber-900: #48331A;
+  --color-amber-950: #2A1D0E;
+
+  /* Neutrals: a faint navy undertone so greys sit with the brand */
+  --color-gray-50:  #F7F8FB;
+  --color-gray-100: #EEF1F6;
+  --color-gray-200: #E1E6EF;
+  --color-gray-300: #CCD3E0;
+  --color-gray-400: #97A1B6;
+  --color-gray-500: #6A7489;
+  --color-gray-600: #4D566B;
+  --color-gray-700: #394259;
+  --color-gray-800: #232B42;
+  --color-gray-900: #131A2D;
+  --color-gray-950: #0A0F1E;
+
+  --color-slate-50:  #F7F8FB;
+  --color-slate-100: #EEF1F6;
+  --color-slate-200: #E1E6EF;
+  --color-slate-300: #CCD3E0;
+  --color-slate-400: #97A1B6;
+  --color-slate-500: #6A7489;
+  --color-slate-600: #4D566B;
+  --color-slate-700: #394259;
+  --color-slate-800: #232B42;
+  --color-slate-900: #131A2D;
+  --color-slate-950: #0A0F1E;
+
+  --color-zinc-50:  #F7F8FB;
+  --color-zinc-100: #EEF1F6;
+  --color-zinc-200: #E1E6EF;
+  --color-zinc-300: #CCD3E0;
+  --color-zinc-400: #97A1B6;
+  --color-zinc-500: #6A7489;
+  --color-zinc-600: #4D566B;
+  --color-zinc-700: #394259;
+  --color-zinc-800: #232B42;
+  --color-zinc-900: #131A2D;
+  --color-zinc-950: #0A0F1E;
+
+  --color-neutral-50:  #F7F8FB;
+  --color-neutral-100: #EEF1F6;
+  --color-neutral-200: #E1E6EF;
+  --color-neutral-300: #CCD3E0;
+  --color-neutral-400: #97A1B6;
+  --color-neutral-500: #6A7489;
+  --color-neutral-600: #4D566B;
+  --color-neutral-700: #394259;
+  --color-neutral-800: #232B42;
+  --color-neutral-900: #131A2D;
+  --color-neutral-950: #0A0F1E;
+
+  /* Calmer jewel tones: same meaning (green = good, red = danger ...),
+     minus the neon, so status colours sit with navy + gold. */
+
+  --color-green-50: #F2F9F6;
+  --color-green-100: #E3F3EC;
+  --color-green-200: #C2E4D6;
+  --color-green-300: #96D1B8;
+  --color-green-400: #5DB991;
+  --color-green-500: #24A06B;
+  --color-green-600: #1F8A5C;
+  --color-green-700: #19704B;
+  --color-green-800: #13563A;
+  --color-green-900: #0E402B;
+  --color-green-950: #092A1C;
+
+  --color-emerald-50: #F2F9F7;
+  --color-emerald-100: #E2F2ED;
+  --color-emerald-200: #C0E3D9;
+  --color-emerald-300: #93CFBE;
+  --color-emerald-400: #59B69B;
+  --color-emerald-500: #1F9C78;
+  --color-emerald-600: #1B8667;
+  --color-emerald-700: #166D54;
+  --color-emerald-800: #115441;
+  --color-emerald-900: #0C3E30;
+  --color-emerald-950: #08291F;
+
+  --color-red-50: #FDF4F3;
+  --color-red-100: #FAE7E6;
+  --color-red-200: #F4CCC9;
+  --color-red-300: #EDA7A3;
+  --color-red-400: #E37871;
+  --color-red-500: #D9483F;
+  --color-red-600: #BB3E36;
+  --color-red-700: #98322C;
+  --color-red-800: #752722;
+  --color-red-900: #571D19;
+  --color-red-950: #381310;
+
+  --color-purple-50: #F6F5FA;
+  --color-purple-100: #ECEAF5;
+  --color-purple-200: #D6D2E9;
+  --color-purple-300: #B9B2D9;
+  --color-purple-400: #9489C5;
+  --color-purple-500: #6E5FB0;
+  --color-purple-600: #5F5297;
+  --color-purple-700: #4D427B;
+  --color-purple-800: #3B335F;
+  --color-purple-900: #2C2646;
+  --color-purple-950: #1D192E;
+
+  --color-violet-50: #F7F6FB;
+  --color-violet-100: #EDEBF5;
+  --color-violet-200: #D8D3EA;
+  --color-violet-300: #BDB4DB;
+  --color-violet-400: #998CC8;
+  --color-violet-500: #7563B5;
+  --color-violet-600: #65559C;
+  --color-violet-700: #52457F;
+  --color-violet-800: #3F3562;
+  --color-violet-900: #2F2848;
+  --color-violet-950: #1E1A2F;
+
+  --color-orange-50: #FCF6F3;
+  --color-orange-100: #F9EDE4;
+  --color-orange-200: #F2D7C5;
+  --color-orange-300: #E9BB9B;
+  --color-orange-400: #DE9665;
+  --color-orange-500: #D2712F;
+  --color-orange-600: #B56128;
+  --color-orange-700: #934F21;
+  --color-orange-800: #713D19;
+  --color-orange-900: #542D13;
+  --color-orange-950: #371D0C;
+
+  --color-cyan-50: #F2F9FA;
+  --color-cyan-100: #E3F1F4;
+  --color-cyan-200: #C3E1E7;
+  --color-cyan-300: #99CBD5;
+  --color-cyan-400: #61AFBF;
+  --color-cyan-500: #2A93A8;
+  --color-cyan-600: #247E90;
+  --color-cyan-700: #1D6776;
+  --color-cyan-800: #174F5B;
+  --color-cyan-900: #113B43;
+  --color-cyan-950: #0B262C;
+
+  --color-teal-50: #F2F8F8;
+  --color-teal-100: #E2F0F0;
+  --color-teal-200: #C0E0DF;
+  --color-teal-300: #93C9C7;
+  --color-teal-400: #59ACA9;
+  --color-teal-500: #1F8F8B;
+  --color-teal-600: #1B7B78;
+  --color-teal-700: #166461;
+  --color-teal-800: #114D4B;
+  --color-teal-900: #0C3938;
+  --color-teal-950: #082524;
+
+  --color-yellow-50: #FCF9F2;
+  --color-yellow-100: #F8F3E3;
+  --color-yellow-200: #F0E5C3;
+  --color-yellow-300: #E5D297;
+  --color-yellow-400: #D7BA5F;
+  --color-yellow-500: #C9A227;
+  --color-yellow-600: #AD8B22;
+  --color-yellow-700: #8D711B;
+  --color-yellow-800: #6D5715;
+  --color-yellow-900: #504110;
+  --color-yellow-950: #342A0A;
+
+  /* Navy-tinted elevation: reads as depth, not as grey smudge */
+  --shadow-xs: 0 1px 2px 0 rgb(15 29 61 / 0.05);
+  --shadow-sm: 0 1px 3px 0 rgb(15 29 61 / 0.09), 0 1px 2px -1px rgb(15 29 61 / 0.06);
+  --shadow-md: 0 4px 8px -2px rgb(15 29 61 / 0.10), 0 2px 4px -2px rgb(15 29 61 / 0.06);
+  --shadow-lg: 0 12px 20px -4px rgb(15 29 61 / 0.12), 0 4px 8px -4px rgb(15 29 61 / 0.06);
+  --shadow-xl: 0 24px 36px -8px rgb(15 29 61 / 0.16), 0 8px 12px -6px rgb(15 29 61 / 0.08);
+
+  /* Typography: Inter for the interface, Playfair Display (the wordmark's
+     high-contrast serif cousin) for display headlines. */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-display: var(--font-playfair), "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+}
+
 :root {
-  /* ── Global Navigator Brand Palette (from logo + navigatorglobals.com) ──
-     Extracted from the compass logo and the site's own warm/cream sections:
-       Compass navy        →  #1F3B63
-       Compass red mark    →  #D9331E
-       Site amber accent   →  #F6B44B
-       Site cream section  →  #F5F5DC
-       Peach page wash     →  #FBEAE0
-  ────────────────────────────────────────────────────────────────── */
-  --dmc-green:          #1F3B63;   /* primary – compass navy                 */
-  --dmc-green-dark:     #14273F;   /* deep navy / hover / sidebar header     */
-  --dmc-green-medium:   #3A5C88;   /* mid navy – borders, secondary buttons  */
-  --dmc-green-light:    #6E93BE;   /* light navy tint / highlight            */
-  --dmc-green-soft:     #FBEAE0;   /* page & card background tint – peach    */
-  --dmc-green-softer:   #FDF3EC;   /* subtler surface bg – soft peach        */
+  /* ── Legacy variable names (kept: many components read var(--dmc-*) /
+        var(--cmg-*)). The `green` in --dmc-green is historical; it is the
+        brand PRIMARY (navy). ─────────────────────────────────────────── */
+  --dmc-green:          #14264F;   /* primary navy                            */
+  --dmc-green-dark:     #0F1D3D;   /* logo navy / hover / sidebar             */
+  --dmc-green-medium:   #2C4A8A;   /* mid navy - secondary buttons, borders   */
+  --dmc-green-light:    #93A9D3;   /* light navy tint / highlight             */
+  --dmc-green-soft:     #E9EEF7;   /* soft navy surface (hover, chips)        */
+  --dmc-green-softer:   #F4F6FA;   /* page background                         */
 
-  /* Neutral / text */
-  --dmc-ink:            #2C353F;   /* primary text – warm charcoal navy      */
-  --dmc-muted:          #585A5E;   /* secondary text / labels                */
-  --dmc-border:         #F0D7C7;   /* borders – peach-tinted                 */
-  --dmc-surface:        #FFFFFF;   /* card / panel surface                   */
+  --dmc-ink:            #131A2D;   /* primary text                            */
+  --dmc-muted:          #4D566B;   /* secondary text / labels                 */
+  --dmc-border:         #DCE2EE;   /* borders                                 */
+  --dmc-surface:        #FFFFFF;   /* card / panel surface                    */
 
-  /* Semantic */
-  --dmc-red:            #D9331E;
-  --dmc-red-dark:       #B0241E;
-  --dmc-gold:           #F6B44B;   /* accents / warning badges / active nav  */
-  --dmc-gold-soft:      #FDECD2;
+  --dmc-red:            #C8302B;
+  --dmc-red-dark:       #A32521;
+  --dmc-gold:           #BE9349;   /* accent (on light surfaces)              */
+  --dmc-gold-bright:    #EECA7D;   /* accent (on navy surfaces)               */
+  --dmc-gold-soft:      #F6EBCB;
+  --dmc-cream:          #FBF8F0;
+
+  /* Signature gradients lifted from the logo arc */
+  --mi-gold-gradient:   linear-gradient(115deg, #9D6C2D 0%, #C29B58 38%, #EECA7D 62%, #BE9349 100%);
+  --mi-navy-gradient:   linear-gradient(160deg, #0B1631 0%, #0F1D3D 55%, #14264F 100%);
 
   /* CSS-layer aliases (used by older components) */
   --cmg-blue:           var(--dmc-green);
@@ -39,21 +303,13 @@
   --cmg-border:         var(--dmc-border);
   --cmg-surface:        var(--dmc-surface);
 
-  /* Page background */
   --background:         var(--dmc-green-softer);
   --foreground:         var(--dmc-ink);
 
-  /* ── shadcn/ui token bridge ───────────────────────────────────────
-     Input, Select (Radix) and a few other primitives are written
-     against the standard shadcn token names (border-input, ring-ring,
-     bg-popover, bg-accent, bg-muted, …). Those tokens were never
-     defined here, so every one of those utilities was a silent no-op —
-     Radix selects had no visible focus ring, no popover background, no
-     hover state. Wiring them to the brand palette makes every
-     shadcn-shaped component themed for free, with no per-file edits. */
+  /* ── shadcn/ui token bridge (Input, Radix Select, popovers …) ─────── */
   --border:             var(--dmc-border);
   --input:              var(--dmc-border);
-  --ring:               var(--dmc-green);
+  --ring:               var(--dmc-gold);
   --card:               var(--dmc-surface);
   --card-foreground:    var(--dmc-ink);
   --popover:            var(--dmc-surface);
@@ -95,25 +351,22 @@
   --radius-md: calc(var(--radius) - 0.25rem);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 0.25rem);
-
-  /* Brand-tinted elevation — every shadow-* utility in the app picks
-     this up automatically. Ink-tinted instead of pure black reads as
-     considerably more premium than the Tailwind default at the same
-     opacity, for zero per-component cost. */
-  --shadow-xs: 0 1px 2px 0 rgb(44 53 63 / 0.04);
-  --shadow-sm: 0 1px 3px 0 rgb(44 53 63 / 0.08), 0 1px 2px -1px rgb(44 53 63 / 0.06);
-  --shadow-md: 0 4px 6px -1px rgb(44 53 63 / 0.08), 0 2px 4px -2px rgb(44 53 63 / 0.06);
-  --shadow-lg: 0 10px 15px -3px rgb(44 53 63 / 0.08), 0 4px 6px -4px rgb(44 53 63 / 0.06);
-  --shadow-xl: 0 20px 25px -5px rgb(44 53 63 / 0.10), 0 8px 10px -6px rgb(44 53 63 / 0.06);
-
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  font-feature-settings: "cv11", "ss01";
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4 { letter-spacing: -0.011em; }
+
+.font-display {
+  font-family: var(--font-display);
+  letter-spacing: -0.015em;
 }
 
 .dm-form-invalid {
@@ -137,14 +390,15 @@ body {
 }
 
 ::selection {
-  background: rgba(31, 59, 99, 0.18);
-  color: var(--dmc-ink);
+  background: rgba(238, 202, 125, 0.45);
+  color: var(--dmc-green-dark);
 }
 
 /* ── Page shell ─────────────────────────────────────────────────── */
 .cmg-page-shell {
   background:
-    linear-gradient(180deg, rgba(251, 234, 224, 0.92), rgba(253, 243, 236, 0.98) 240px),
+    radial-gradient(900px 320px at 100% 0%, rgba(238, 202, 125, 0.10), transparent 70%),
+    linear-gradient(180deg, #EEF2F9 0, var(--background) 260px),
     var(--background);
 }
 
@@ -152,173 +406,200 @@ body {
 .cmg-card {
   background: var(--dmc-surface);
   border: 1px solid var(--dmc-border);
-  box-shadow: 0 10px 30px rgba(44, 53, 63, 0.08);
+  box-shadow: 0 10px 30px rgba(15, 29, 61, 0.08);
 }
 
 /* ── Focus ring ─────────────────────────────────────────────────── */
 .cmg-focus { outline: none; }
 .cmg-focus:focus {
-  box-shadow: 0 0 0 3px rgba(31, 59, 99, 0.22);
+  box-shadow: 0 0 0 3px rgba(190, 147, 73, 0.30);
 }
 
-/* ── Tailwind blue → Global Navigator navy remaps ────────────────── */
-/* These override Tailwind's blue utilities so legacy JSX that still
-   uses e.g. "bg-blue-600" renders with the brand navy instead.     */
-.bg-blue-600  { background-color: var(--dmc-green) !important; }
-.bg-blue-700  { background-color: var(--dmc-green-medium) !important; }
-.bg-blue-800  { background-color: var(--dmc-green-dark) !important; }
-.bg-blue-50,
-.bg-blue-100  { background-color: var(--dmc-green-soft) !important; }
-.bg-blue-200  { background-color: #F5D9C6 !important; }
-
-.hover\:bg-blue-700:hover { background-color: var(--dmc-green-medium) !important; }
-.hover\:bg-blue-800:hover { background-color: var(--dmc-green-dark) !important; }
-.hover\:bg-blue-50:hover  { background-color: var(--dmc-green-soft) !important; }
-
-.text-blue-600 { color: var(--dmc-green) !important; }
-.text-blue-700,
-.text-blue-800,
-.text-blue-900 { color: var(--dmc-green-dark) !important; }
-
-.border-blue-200,
-.border-blue-300,
-.border-blue-400,
-.border-blue-500,
-.border-blue-600 { border-color: var(--dmc-border) !important; }
-
-/* Focus/hover border variants aren't covered by the plain classes above
-   (Tailwind compiles them to distinct `.focus\:border-blue-500:focus`
-   selectors) - without these, inputs using the common
-   `focus:border-blue-500 focus:ring-blue-500` pairing got a green focus
-   ring but kept Tailwind's actual blue border underneath. */
-.focus\:border-blue-500:focus,
-.focus\:border-blue-400:focus {
-  border-color: var(--dmc-green) !important;
-}
-
-.hover\:border-blue-300:hover,
-.hover\:border-blue-400:hover {
-  border-color: var(--dmc-green) !important;
-}
-
+/* Any control that opts into Tailwind's blue focus ring gets the brand's
+   gold ring instead - the one place gold is used on every screen. */
 .focus\:ring-blue-500:focus,
-.focus\:ring-blue-400:focus {
-  --tw-ring-color: rgba(31, 59, 99, 0.40) !important;
+.focus\:ring-blue-400:focus,
+.focus\:ring-blue-600:focus {
+  --tw-ring-color: rgba(190, 147, 73, 0.45);
 }
-
-.ring-blue-500 { --tw-ring-color: rgba(31, 59, 99, 0.40) !important; }
-
-/* ── Indigo / violet → Global Navigator navy remaps ──────────────── */
-.bg-indigo-600,
-.bg-indigo-700  { background-color: var(--dmc-green) !important; }
-.text-indigo-600,
-.text-indigo-700 { color: var(--dmc-green) !important; }
 
 /* ── Scrollbar ──────────────────────────────────────────────────── */
-/* Wide enough (both axes) to see and grab without hunting for it —
-   6px was easy to miss entirely, especially the horizontal one on wide
-   tables (leads, invoices, reports, etc). */
 ::-webkit-scrollbar { width: 12px; height: 12px; }
-::-webkit-scrollbar-track { background: var(--dmc-green-softer); }
+::-webkit-scrollbar-track { background: #EDF0F6; }
 ::-webkit-scrollbar-thumb {
-  background: #E8C29B;
+  background: #B9C4DA;
   border-radius: 6px;
-  border: 2px solid var(--dmc-green-softer);
+  border: 2px solid #EDF0F6;
 }
 ::-webkit-scrollbar-thumb:hover { background: var(--dmc-green-medium); }
-::-webkit-scrollbar-corner { background: var(--dmc-green-softer); }
+::-webkit-scrollbar-corner { background: #EDF0F6; }
 
 /* Firefox */
-* { scrollbar-width: auto; scrollbar-color: #E8C29B var(--dmc-green-softer); }
+* { scrollbar-width: auto; scrollbar-color: #B9C4DA #EDF0F6; }
 
-/* ── Sidebar nav scrollbar (always visible, styled) ─────────────── */
-.sidebar-nav {
-  overflow-y: scroll;
-  scrollbar-gutter: stable;
-}
-.sidebar-nav::-webkit-scrollbar {
-  width: 5px;
-}
-.sidebar-nav::-webkit-scrollbar-track {
-  background: #FAF3EE;
-  border-radius: 4px;
-}
-.sidebar-nav::-webkit-scrollbar-thumb {
-  background: var(--dmc-border);
-  border-radius: 4px;
-}
-.sidebar-nav::-webkit-scrollbar-thumb:hover {
-  background: var(--dmc-green);
-}
-
-.dmc-one-brand {
+/* ══════════════════════════════════════════════════════════════════
+   App shell - sidebar
+   ══════════════════════════════════════════════════════════════════ */
+.mi-sidebar {
   position: relative;
-  min-height: 104px;
-  overflow: hidden;
   background:
-    linear-gradient(135deg, rgba(251, 234, 224, 0.95), rgba(255, 255, 255, 0.96) 46%, rgba(253, 236, 210, 0.55)),
-    #ffffff;
+    radial-gradient(420px 260px at 0% 0%, rgba(238, 202, 125, 0.10), transparent 70%),
+    radial-gradient(360px 300px at 100% 100%, rgba(190, 147, 73, 0.08), transparent 70%),
+    var(--mi-navy-gradient);
+  color: #C9D3EA;
 }
 
-.dmc-one-brand::before {
+/* hairline gold edge on the sidebar's right side */
+.mi-sidebar::after {
   content: "";
   position: absolute;
-  inset: -60% auto -60% -45%;
-  width: 62%;
-  background: linear-gradient(100deg, transparent, rgba(246, 180, 75, 0.28), transparent);
-  transform: rotate(14deg);
-  animation: dmc-brand-sheen 5.8s ease-in-out infinite;
+  inset: 0 0 0 auto;
+  width: 1px;
+  background: linear-gradient(180deg, rgba(238, 202, 125, 0) 0%, rgba(238, 202, 125, 0.55) 30%, rgba(190, 147, 73, 0.15) 100%);
   pointer-events: none;
 }
 
-.dmc-one-logo-frame {
-  /* The logo image is a fully self-contained mark (its own white fill +
-     navy/red compass) - no card/shadow/gradient backdrop behind it, or it
-     reads as a rounded-rect card nested around the mark, which fights its
-     own shape. Just a subtle float to match the rest of the brand block's
-     motion. */
-  animation: dmc-logo-float 4.8s ease-in-out infinite;
+.mi-sidebar-brand {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
 }
 
-.dmc-one-title {
-  color: var(--dmc-ink);
-  font-size: 1.05rem;
-  font-weight: 800;
-  letter-spacing: 0;
+.sidebar-nav {
+  overflow-y: scroll;
+  scrollbar-gutter: stable;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.16) transparent;
+}
+.sidebar-nav::-webkit-scrollbar { width: 5px; }
+.sidebar-nav::-webkit-scrollbar-track { background: transparent; }
+.sidebar-nav::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.16);
+  border: 0;
+  border-radius: 4px;
+}
+.sidebar-nav::-webkit-scrollbar-thumb:hover { background: rgba(238, 202, 125, 0.55); }
+
+.mi-nav-group {
+  color: rgba(238, 202, 125, 0.78);
+  letter-spacing: 0.14em;
 }
 
-.dmc-one-subtitle {
-  color: var(--dmc-green-dark);
-  background: rgba(253, 236, 210, 0.9);
-  box-shadow: inset 0 0 0 1px rgba(240, 215, 199, 0.9);
+.mi-nav-link {
+  position: relative;
+  color: #C9D3EA;
+}
+.mi-nav-link:hover {
+  background: rgba(255, 255, 255, 0.07);
+  color: #FFFFFF;
+}
+.mi-nav-link[aria-current="page"] {
+  background: linear-gradient(90deg, rgba(238, 202, 125, 0.18), rgba(238, 202, 125, 0.04));
+  color: #FFFFFF;
+  font-weight: 600;
+}
+.mi-nav-link[aria-current="page"]::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 22%;
+  bottom: 22%;
+  width: 3px;
+  border-radius: 0 3px 3px 0;
+  background: var(--mi-gold-gradient);
+}
+.mi-nav-link[aria-current="page"] svg { color: var(--dmc-gold-bright); }
+
+/* ══════════════════════════════════════════════════════════════════
+   Utilities
+   ══════════════════════════════════════════════════════════════════ */
+.mi-gold-text {
+  background: var(--mi-gold-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
-@keyframes dmc-brand-sheen {
-  0%, 58% {
-    transform: translateX(0) rotate(14deg);
-    opacity: 0;
-  }
-  70% {
-    opacity: 1;
-  }
-  100% {
-    transform: translateX(310%) rotate(14deg);
-    opacity: 0;
-  }
+.mi-gold-rule {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(190, 147, 73, 0.7), transparent);
 }
 
-@keyframes dmc-logo-float {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-2px);
-  }
+/* ══════════════════════════════════════════════════════════════════
+   Login - "Your world, unlocked."
+   ══════════════════════════════════════════════════════════════════ */
+.mi-login-panel {
+  background:
+    radial-gradient(700px 520px at 78% 12%, rgba(238, 202, 125, 0.16), transparent 65%),
+    radial-gradient(560px 420px at 8% 92%, rgba(44, 74, 138, 0.55), transparent 70%),
+    linear-gradient(155deg, #070E22 0%, #0B1631 42%, #0F1D3D 100%);
+}
+
+.mi-login-grain {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.055) 1px, transparent 1px);
+  background-size: 22px 22px;
+  mask-image: radial-gradient(ellipse at 70% 30%, #000 0%, transparent 72%);
+  -webkit-mask-image: radial-gradient(ellipse at 70% 30%, #000 0%, transparent 72%);
+}
+
+.mi-orbit-draw {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: mi-orbit-draw 2.4s cubic-bezier(0.22, 0.8, 0.2, 1) 0.25s forwards;
+}
+
+.mi-orbit-spin {
+  transform-origin: 50% 50%;
+  animation: mi-orbit-spin 60s linear infinite;
+}
+
+.mi-keyhole-glow {
+  animation: mi-keyhole-glow 4.2s ease-in-out infinite;
+}
+
+.mi-float {
+  animation: mi-float 6s ease-in-out infinite;
+}
+
+.mi-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+.mi-shimmer::after {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 -60%;
+  width: 45%;
+  background: linear-gradient(100deg, transparent, rgba(238, 202, 125, 0.45), transparent);
+  transform: skewX(-18deg);
+  transition: none;
+  pointer-events: none;
+}
+.mi-shimmer:hover:not(:disabled)::after {
+  animation: mi-shimmer 0.9s ease-out;
+}
+
+@keyframes mi-orbit-draw {
+  to { stroke-dashoffset: 0; }
+}
+@keyframes mi-orbit-spin {
+  to { transform: rotate(360deg); }
+}
+@keyframes mi-keyhole-glow {
+  0%, 100% { opacity: 0.55; }
+  50% { opacity: 1; }
+}
+@keyframes mi-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+@keyframes mi-shimmer {
+  from { left: -60%; }
+  to { left: 130%; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .dmc-one-brand::before,
-  .dmc-one-logo-frame {
-    animation: none;
-  }
+  .mi-orbit-draw { animation: none; stroke-dashoffset: 0; }
+  .mi-orbit-spin,
+  .mi-keyhole-glow,
+  .mi-float,
+  .mi-shimmer:hover:not(:disabled)::after { animation: none; }
 }

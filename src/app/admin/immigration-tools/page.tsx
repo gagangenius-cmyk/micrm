@@ -41,7 +41,7 @@ export default function ImmigrationToolsPage() {
   const [tab, setTab] = useState<TabId>('snapshot');
 
   const tabs = country === 'canada' ? canadaTabs : australiaTabs;
-  const accent = country === 'canada' ? 'var(--cmg-red)' : '#2563eb';
+  const accent = country === 'canada' ? 'var(--cmg-red)' : '#2C4A8A';
 
   const selectCountry = (next: Country) => {
     setCountry(next);
@@ -55,7 +55,7 @@ export default function ImmigrationToolsPage() {
         <div className="flex h-11 w-11 items-center justify-center rounded-md bg-[var(--cmg-blue)] text-lg font-bold text-white">GN</div>
         <div>
           <h1 className="text-2xl font-bold text-[var(--cmg-ink)]">Immigration Tools</h1>
-          <p className="text-xs font-semibold uppercase tracking-wide text-[var(--cmg-muted)]">Sales Module · Global Navigator CRM</p>
+          <p className="text-xs font-semibold uppercase tracking-wide text-[var(--cmg-muted)]">Sales Module · Migrantly CRM</p>
         </div>
       </div>
 

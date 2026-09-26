@@ -213,15 +213,15 @@ export default function InvoicesManagement() {
       <html><head><title>Invoice ${invoice.receipt}</title>
       <style>
         body { font-family: Arial, sans-serif; padding: 40px; color: #333; }
-        .header { text-align: center; border-bottom: 3px solid #1e40af; padding-bottom: 20px; margin-bottom: 20px; }
-        .header h1 { color: #1e40af; margin: 0; font-size: 24px; }
+        .header { text-align: center; border-bottom: 3px solid #14264F; padding-bottom: 20px; margin-bottom: 20px; }
+        .header h1 { color: #14264F; margin: 0; font-size: 24px; }
         .row { display: flex; justify-content: space-between; margin-bottom: 20px; }
         .col { flex: 1; }
         .label { font-weight: bold; color: #555; font-size: 12px; text-transform: uppercase; }
         .value { font-size: 14px; margin-top: 4px; }
         table { width: 100%; border-collapse: collapse; margin: 20px 0; }
         th, td { border: 1px solid #ddd; padding: 10px 12px; text-align: left; }
-        th { background: #1e40af; color: white; }
+        th { background: #14264F; color: white; }
         .total-row td { background: #f0f4ff; font-weight: bold; }
         .footer { margin-top: 40px; font-size: 12px; color: #888; text-align: center; border-top: 1px solid #ddd; padding-top: 10px; }
         @media print { body { padding: 20px; } }

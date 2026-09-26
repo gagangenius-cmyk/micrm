@@ -15,7 +15,7 @@ export default function HomePage() {
     <div className="min-h-screen cmg-page-shell flex items-center justify-center">
       <div className="text-center">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[var(--cmg-blue)] mx-auto mb-4"></div>
-        <p className="text-[var(--cmg-muted)]">Loading Global Navigator CRM...</p>
+        <p className="text-[var(--cmg-muted)]">Loading Migrantly CRM...</p>
       </div>
     </div>
   );

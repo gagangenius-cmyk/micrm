@@ -124,8 +124,8 @@ export default function MonthlyLeadsReceivedReport() {
       {
         label: 'Total Leads',
         data: monthlyData.map(d => d.totalLeads),
-        backgroundColor: '#3B82F6',
-        borderColor: '#3B82F6',
+        backgroundColor: '#5B78B3',
+        borderColor: '#5B78B3',
         borderWidth: 2,
       },
       {
@@ -158,7 +158,7 @@ export default function MonthlyLeadsReceivedReport() {
     datasets: [
       {
         data: sourceData.map(d => d.leads),
-        backgroundColor: ['#3B82F6', '#10B981', '#F59E0B', '#EF4444', '#8B5CF6', '#6B7280'],
+        backgroundColor: ['#5B78B3', '#10B981', '#BE9349', '#EF4444', '#8B5CF6', '#6B7280'],
         borderWidth: 1,
       }
     ]
@@ -170,7 +170,7 @@ export default function MonthlyLeadsReceivedReport() {
       {
         label: 'Leads by Country',
         data: countryData.map(d => d.leads),
-        backgroundColor: '#3B82F6',
+        backgroundColor: '#5B78B3',
       }
     ]
   };

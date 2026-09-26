@@ -149,8 +149,8 @@ export default function ProgramWiseRetentionsReport() {
       {
         label: 'Retention Rate (%)',
         data: programData.map(d => d.retentionRate),
-        backgroundColor: '#3B82F6',
-        borderColor: '#3B82F6',
+        backgroundColor: '#5B78B3',
+        borderColor: '#5B78B3',
         borderWidth: 2,
       }
     ]
@@ -190,7 +190,7 @@ export default function ProgramWiseRetentionsReport() {
       {
         label: 'New Clients',
         data: monthlyMetrics.map(d => d.newClients),
-        backgroundColor: '#3B82F6',
+        backgroundColor: '#5B78B3',
       },
       {
         label: 'Retained Clients',
