@@ -1319,6 +1319,10 @@ export class HRService {
       )
     `);
     await this.addColumnIfMissing('crm_hr_payslips', 'currency_code', "VARCHAR(10) NOT NULL DEFAULT 'AED' AFTER net_salary");
+    // database-schema.sql / migrations/20260614 created this table in its older
+    // shape (created_at only); the service reads and writes these two.
+    await this.addColumnIfMissing('crm_hr_payslips', 'generated_by', 'CHAR(36) NULL');
+    await this.addColumnIfMissing('crm_hr_payslips', 'generated_at', 'DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP');
   }
 
   static async ensureCompensationTable() {

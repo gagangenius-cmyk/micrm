@@ -278,7 +278,7 @@ export default function LoginForm() {
 
               <div className="relative rounded-2xl border border-[#E1E6EF] bg-white p-6 shadow-[0_24px_44px_-28px_rgba(15,29,61,0.45)] before:pointer-events-none before:absolute before:inset-x-8 before:top-0 before:h-px before:bg-[linear-gradient(90deg,transparent,#BE9349,transparent)] sm:p-7">
                 {mfaStep ? (
-                  <form onSubmit={handleVerifyMfa} className="space-y-5" noValidate>
+                  <form onSubmit={handleVerifyMfa} method="post" className="space-y-5" noValidate>
                     <motion.div key="mfa-field" {...rise(1)}>
                       <TextField
                         id="mfaCode"
@@ -328,7 +328,8 @@ export default function LoginForm() {
                     </motion.div>
                   </form>
                 ) : (
-                  <form onSubmit={handleSubmit} className="space-y-5">
+                  // method="post": if the form is submitted before JS has loaded, the browser must not put the password in the URL
+                  <form onSubmit={handleSubmit} method="post" className="space-y-5">
                     <motion.div key="username" {...rise(1)}>
                       <TextField
                         id="username"

@@ -190,7 +190,9 @@ export default function ContractAnalyticsPage() {
         ]
       }
 
-      setAnalytics([] as any);
+      // There is no analytics API behind this page yet. An empty array made every
+      // `analytics.<list>.map(...)` below throw; null shows the empty state instead.
+      setAnalytics(null);
     } catch (error) {
       console.error('Error fetching analytics:', error)
     } finally {

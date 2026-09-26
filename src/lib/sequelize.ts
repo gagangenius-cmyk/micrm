@@ -29,6 +29,21 @@ const sequelize = new Sequelize(
   }
 );
 
+// The ~90 GROUP BY queries in this codebase were written against XAMPP's
+// permissive default sql_mode (selecting columns that are not in the GROUP BY).
+// A stock MySQL 8 server enables ONLY_FULL_GROUP_BY and rejects them with
+// ER_WRONG_FIELD_WITH_GROUP (e.g. /api/admin/recovery-report). Drop just that
+// one mode for this app's own connections; the rest of the strict modes stay,
+// and the server's global sql_mode is left alone.
+sequelize.addHook('afterConnect', (connection: unknown) =>
+  new Promise<void>((resolve, reject) => {
+    (connection as { query: (sql: string, cb: (err: Error | null) => void) => void }).query(
+      "SET SESSION sql_mode = REPLACE(@@SESSION.sql_mode, 'ONLY_FULL_GROUP_BY', '')",
+      (err) => (err ? reject(err) : resolve()),
+    );
+  }),
+);
+
 // Test the connection
 const connectDB = async () => {
   try {

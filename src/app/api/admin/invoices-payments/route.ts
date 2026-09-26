@@ -245,7 +245,7 @@ async function getInvoices(search: string, status: string, dateFrom: string, dat
       b.vat_gst_percent AS branchVatGstPercent,
       b.abbrv AS branchAbbrv,
       e.name AS counselorName,
-      p.paymentNumber, p.paidAmount, p.proofOfPaymentUrl, p.paymentMethod, p.paymentDate,
+      p.paymentNumber, p.paidAmount, p.receiptUrl AS proofOfPaymentUrl, p.paymentMethod, p.paymentDate,
       p.clientName AS oppClientName, p.clientEmail AS oppClientEmail, p.clientPhone AS oppClientPhone,
       p.serviceName, p.receiptUrl, p.currency
     FROM crm_b2b_invoices i

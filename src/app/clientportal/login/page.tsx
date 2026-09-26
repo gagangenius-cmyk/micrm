@@ -1,8 +1,12 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useClientAuth } from '@/contexts/ClientAuthContext';
+
+const FIELD =
+  'mt-1.5 block h-11 w-full rounded-xl border border-[#8A96B0] bg-white px-3.5 text-[15px] text-[#131A2D] outline-none transition-[border-color,box-shadow] duration-150 placeholder:text-[#6F7A92] hover:border-[#5B678A] focus:border-[#BE9349] focus:ring-[3px] focus:ring-[#BE9349]/25';
 
 export default function ClientPortalLoginPage() {
   const { login } = useClientAuth();
@@ -37,37 +41,51 @@ export default function ClientPortalLoginPage() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-slate-100">
-      <form onSubmit={handleSubmit} className="w-full max-w-sm rounded-lg border border-slate-200 bg-white p-8 shadow-sm">
-        <h1 className="text-xl font-bold text-slate-900">Client Portal Sign In</h1>
-        <p className="mt-1 text-sm text-slate-500">Sign in with the credentials your counselor emailed you.</p>
+    <div className="mi-login-panel relative flex min-h-screen items-center justify-center overflow-hidden px-4 py-10">
+      <div className="mi-login-grain pointer-events-none absolute inset-0" aria-hidden="true" />
+      <form
+        onSubmit={handleSubmit}
+        method="post"
+        className="relative w-full max-w-md rounded-2xl border border-white/10 bg-white p-8 shadow-[0_32px_64px_-28px_rgba(4,9,21,0.85)] before:pointer-events-none before:absolute before:inset-x-8 before:top-0 before:h-px before:bg-[linear-gradient(90deg,transparent,#BE9349,transparent)]"
+      >
+        <Image src="/logo-trimmed.png" alt="Migrantly.ae - Your world, unlocked." width={1413} height={757} priority className="mx-auto h-20 w-auto" />
+        <h1 className="font-display mt-5 text-center text-[1.75rem] font-semibold leading-tight text-[#0F1D3D]">Client Portal</h1>
+        <p className="mt-1.5 text-balance text-center text-sm text-[#4D566B]">Sign in with the credentials your counselor emailed you.</p>
 
-        {error && <div className="mt-4 rounded-md border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700">{error}</div>}
+        {error && (
+          <div role="alert" className="mt-5 rounded-xl border border-[#F2B8B0] bg-[#FDECEA] px-3.5 py-2.5 text-sm text-[#A32521]">
+            {error}
+          </div>
+        )}
 
-        <div className="mt-4">
-          <label className="block text-sm font-medium text-slate-700">Email</label>
+        <div className="mt-5">
+          <label htmlFor="client-email" className="block text-[13px] font-semibold text-[#131A2D]">Email</label>
           <input
+            id="client-email"
             type="email"
             required
+            autoComplete="username"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="mt-1 block w-full rounded-md border border-slate-300 px-3 py-2 text-sm shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500"
+            className={FIELD}
           />
         </div>
         <div className="mt-4">
-          <label className="block text-sm font-medium text-slate-700">Password</label>
+          <label htmlFor="client-password" className="block text-[13px] font-semibold text-[#131A2D]">Password</label>
           <input
+            id="client-password"
             type="password"
             required
+            autoComplete="current-password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="mt-1 block w-full rounded-md border border-slate-300 px-3 py-2 text-sm shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500"
+            className={FIELD}
           />
         </div>
         <button
           type="submit"
           disabled={isSubmitting}
-          className="mt-6 w-full rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 disabled:opacity-50"
+          className="mi-shimmer mt-6 flex h-11 w-full items-center justify-center rounded-xl border border-[#EECA7D]/30 bg-[linear-gradient(135deg,#14264F_0%,#0F1D3D_100%)] text-sm font-semibold text-white shadow-[0_14px_26px_-14px_rgba(15,29,61,0.85)] transition hover:border-[#EECA7D]/60 focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-[#BE9349]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-white disabled:cursor-not-allowed disabled:opacity-60"
         >
           {isSubmitting ? 'Signing in…' : 'Sign In'}
         </button>

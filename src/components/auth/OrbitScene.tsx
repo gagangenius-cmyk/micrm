@@ -36,9 +36,13 @@ const STARS: [number, number, number][] = [
   [864, 322, 1.4], [40, 380, 1.1], [232, 36, 1], [452, 122, 0.9], [610, 168, 1], [148, 640, 1.1],
 ]
 
+// Rounded on purpose: Math.sin/cos differ in the last digit between the server's Node and the
+// browser's engine, and a raw float in an SVG attribute then trips React's hydration check.
+const round2 = (n: number) => Math.round(n * 100) / 100
+
 const onOrbit = (angleDeg: number) => {
   const a = (angleDeg * Math.PI) / 180
-  return { x: CX + RX * Math.cos(a), y: CY + RY * Math.sin(a) }
+  return { x: round2(CX + RX * Math.cos(a)), y: round2(CY + RY * Math.sin(a)) }
 }
 
 export function OrbitScene({ compact = false, busy = false }: OrbitSceneProps) {
