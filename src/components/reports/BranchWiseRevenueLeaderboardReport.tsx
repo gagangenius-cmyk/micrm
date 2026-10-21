@@ -105,8 +105,8 @@ export default function BranchWiseRevenueLeaderboardReport() {
       {
         label: 'Target Achievement (%)',
         data: branchData.slice(0, 5).map(d => d.achievement),
-        backgroundColor: ['#5B78B3', '#10B981', '#BE9349', '#EF4444', '#8B5CF6'],
-        borderColor: ['#5B78B3', '#10B981', '#BE9349', '#EF4444', '#8B5CF6'],
+        backgroundColor: ['#5B78B3', '#10B981', '#E0381A', '#EF4444', '#8B5CF6'],
+        borderColor: ['#5B78B3', '#10B981', '#E0381A', '#EF4444', '#8B5CF6'],
         borderWidth: 2,
       }
     ]

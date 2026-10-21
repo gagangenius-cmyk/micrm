@@ -11,7 +11,7 @@ const buttonVariants = {
   outline: "border border-[var(--cmg-border)] bg-white text-[var(--cmg-ink)] hover:bg-[var(--cmg-blue-soft)] hover:border-[var(--cmg-blue)]/30",
   secondary: "bg-[var(--cmg-blue-soft)] text-[var(--cmg-blue)] hover:bg-[#D5DDEE]",
   ghost: "text-[var(--cmg-muted)] hover:bg-[var(--cmg-blue-soft)] hover:text-[var(--cmg-blue)]",
-  link: "text-[var(--cmg-blue)] underline-offset-4 hover:text-[#86602A] hover:underline"
+  link: "text-[var(--cmg-blue)] underline-offset-4 hover:text-[#9E2410] hover:underline"
 }
 
 const buttonSizes = {

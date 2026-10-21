@@ -80,8 +80,8 @@ export default function ApprovedRetainedAmountReport() {
       {
         label: 'Pending Amount',
         data: monthlyData.map(d => d.pending),
-        backgroundColor: '#BE9349',
-        borderColor: '#BE9349',
+        backgroundColor: '#E0381A',
+        borderColor: '#E0381A',
         borderWidth: 1,
       }
     ]

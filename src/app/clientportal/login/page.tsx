@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import { useClientAuth } from '@/contexts/ClientAuthContext';
 
 const FIELD =
-  'mt-1.5 block h-11 w-full rounded-xl border border-[#8A96B0] bg-white px-3.5 text-[15px] text-[#131A2D] outline-none transition-[border-color,box-shadow] duration-150 placeholder:text-[#6F7A92] hover:border-[#5B678A] focus:border-[#BE9349] focus:ring-[3px] focus:ring-[#BE9349]/25';
+  'mt-1.5 block h-11 w-full rounded-xl border border-[#8A96B0] bg-white px-3.5 text-[15px] text-[#131A2D] outline-none transition-[border-color,box-shadow] duration-150 placeholder:text-[#6F7A92] hover:border-[#5B678A] focus:border-[#E0381A] focus:ring-[3px] focus:ring-[#E0381A]/25';
 
 export default function ClientPortalLoginPage() {
   const { login } = useClientAuth();
@@ -46,7 +46,7 @@ export default function ClientPortalLoginPage() {
       <form
         onSubmit={handleSubmit}
         method="post"
-        className="relative w-full max-w-md rounded-2xl border border-white/10 bg-white p-8 shadow-[0_32px_64px_-28px_rgba(4,9,21,0.85)] before:pointer-events-none before:absolute before:inset-x-8 before:top-0 before:h-px before:bg-[linear-gradient(90deg,transparent,#BE9349,transparent)]"
+        className="relative w-full max-w-md rounded-2xl border border-white/10 bg-white p-8 shadow-[0_32px_64px_-28px_rgba(4,9,21,0.85)] before:pointer-events-none before:absolute before:inset-x-8 before:top-0 before:h-px before:bg-[linear-gradient(90deg,transparent,#E0381A,transparent)]"
       >
         <Image src="/logo-trimmed.png" alt="Migrantly.ae - Your world, unlocked." width={1413} height={757} priority className="mx-auto h-20 w-auto" />
         <h1 className="font-display mt-5 text-center text-[1.75rem] font-semibold leading-tight text-[#0F1D3D]">Client Portal</h1>
@@ -85,7 +85,7 @@ export default function ClientPortalLoginPage() {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="mi-shimmer mt-6 flex h-11 w-full items-center justify-center rounded-xl border border-[#EECA7D]/30 bg-[linear-gradient(135deg,#14264F_0%,#0F1D3D_100%)] text-sm font-semibold text-white shadow-[0_14px_26px_-14px_rgba(15,29,61,0.85)] transition hover:border-[#EECA7D]/60 focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-[#BE9349]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-white disabled:cursor-not-allowed disabled:opacity-60"
+          className="mi-shimmer mt-6 flex h-11 w-full items-center justify-center rounded-xl border border-[#F4896A]/30 bg-[linear-gradient(135deg,#14264F_0%,#0F1D3D_100%)] text-sm font-semibold text-white shadow-[0_14px_26px_-14px_rgba(15,29,61,0.85)] transition hover:border-[#F4896A]/60 focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-[#E0381A]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-white disabled:cursor-not-allowed disabled:opacity-60"
         >
           {isSubmitting ? 'Signing in…' : 'Sign In'}
         </button>

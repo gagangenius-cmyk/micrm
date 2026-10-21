@@ -158,7 +158,7 @@ export default function MonthlyLeadsReceivedReport() {
     datasets: [
       {
         data: sourceData.map(d => d.leads),
-        backgroundColor: ['#5B78B3', '#10B981', '#BE9349', '#EF4444', '#8B5CF6', '#6B7280'],
+        backgroundColor: ['#5B78B3', '#10B981', '#E0381A', '#EF4444', '#8B5CF6', '#6B7280'],
         borderWidth: 1,
       }
     ]

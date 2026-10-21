@@ -96,8 +96,8 @@ export default function TotalRevenueReport() {
       {
         label: 'Service Revenue',
         data: monthlyData.map(d => d.serviceRevenue),
-        backgroundColor: '#BE9349',
-        borderColor: '#BE9349',
+        backgroundColor: '#E0381A',
+        borderColor: '#E0381A',
         borderWidth: 2,
       }
     ]
@@ -123,7 +123,7 @@ export default function TotalRevenueReport() {
     datasets: [
       {
         data: programData.map(d => d.revenue),
-        backgroundColor: ['#5B78B3', '#10B981', '#BE9349', '#EF4444', '#8B5CF6'],
+        backgroundColor: ['#5B78B3', '#10B981', '#E0381A', '#EF4444', '#8B5CF6'],
         borderWidth: 1,
       }
     ]

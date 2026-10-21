@@ -60,7 +60,7 @@ const monthLabel = (m: string) => {
   return d.toLocaleDateString('en', { month: 'short', year: '2-digit' });
 };
 
-const CHART_COLORS = ['#14264F', '#0F1D3D', '#2C4A8A', '#C8302B', '#BE9349', '#A32521', '#0f766e', '#7c3aed'];
+const CHART_COLORS = ['#14264F', '#0F1D3D', '#2C4A8A', '#C8302B', '#E0381A', '#A32521', '#0f766e', '#7c3aed'];
 
 const STATUS_COLOR: Record<string, string> = {
   won: 'bg-green-100 text-green-700',

@@ -5,7 +5,7 @@
    ──────────────────────────────────────────────────────────────────────
    Every colour below was sampled from the Migrantly logo (public/logo.png):
      Wordmark navy      →  #0F1D3D
-     Arc / arrow gold   →  gradient  #9D6C2D → #C29B58 → #EECA7D
+     Arc / arrow gold   →  gradient  #B8260F → #E0381A → #F4896A
    Navy carries structure (sidebar, primary actions, text); gold is the
    accent - active states, focus, highlights, "unlocked" moments.
 
@@ -29,17 +29,17 @@
   --color-navy-950: #040915;
 
   /* ── Brand gold (logo arc + arrow) ──────────────────────────────── */
-  --color-gold-50:  #FBF7EC;
-  --color-gold-100: #F6EBCB;
-  --color-gold-200: #EFD9A0;
-  --color-gold-300: #EECA7D;
-  --color-gold-400: #D9B267;
-  --color-gold-500: #BE9349;
-  --color-gold-600: #A47A33;
-  --color-gold-700: #86602A;
-  --color-gold-800: #684A22;
-  --color-gold-900: #48331A;
-  --color-gold-950: #2A1D0E;
+  --color-gold-50:  #FEF3EE;
+  --color-gold-100: #FDE1D6;
+  --color-gold-200: #FBC0AA;
+  --color-gold-300: #F4896A;
+  --color-gold-400: #EC6540;
+  --color-gold-500: #E0381A;
+  --color-gold-600: #C42B12;
+  --color-gold-700: #9E2410;
+  --color-gold-800: #7E1E0E;
+  --color-gold-900: #5A170B;
+  --color-gold-950: #360D06;
 
   /* ── Tailwind families re-pointed at the brand ──────────────────── */
   --color-blue-50:  #F3F6FB;
@@ -80,17 +80,17 @@
   --color-sky-950: #0F1B2D;
 
   /* amber = the warning colour; brand gold stands in for it */
-  --color-amber-50:  #FBF7EC;
-  --color-amber-100: #F6EBCB;
-  --color-amber-200: #EFD9A0;
+  --color-amber-50:  #FEF3EE;
+  --color-amber-100: #FDE1D6;
+  --color-amber-200: #FBC0AA;
   --color-amber-300: #E6C377;
   --color-amber-400: #D2A85A;
-  --color-amber-500: #BE9349;
-  --color-amber-600: #A47A33;
-  --color-amber-700: #86602A;
-  --color-amber-800: #684A22;
-  --color-amber-900: #48331A;
-  --color-amber-950: #2A1D0E;
+  --color-amber-500: #E0381A;
+  --color-amber-600: #C42B12;
+  --color-amber-700: #9E2410;
+  --color-amber-800: #7E1E0E;
+  --color-amber-900: #5A170B;
+  --color-amber-950: #360D06;
 
   /* Neutrals: a faint navy undertone so greys sit with the brand */
   --color-gray-50:  #F7F8FB;
@@ -283,13 +283,13 @@
 
   --dmc-red:            #C8302B;
   --dmc-red-dark:       #A32521;
-  --dmc-gold:           #BE9349;   /* accent (on light surfaces)              */
-  --dmc-gold-bright:    #EECA7D;   /* accent (on navy surfaces)               */
-  --dmc-gold-soft:      #F6EBCB;
+  --dmc-gold:           #E0381A;   /* accent (on light surfaces)              */
+  --dmc-gold-bright:    #F4896A;   /* accent (on navy surfaces)               */
+  --dmc-gold-soft:      #FDE1D6;
   --dmc-cream:          #FBF8F0;
 
   /* Signature gradients lifted from the logo arc */
-  --mi-gold-gradient:   linear-gradient(115deg, #9D6C2D 0%, #C29B58 38%, #EECA7D 62%, #BE9349 100%);
+  --mi-gold-gradient:   linear-gradient(115deg, #B8260F 0%, #E0381A 38%, #F4896A 62%, #E0381A 100%);
   --mi-navy-gradient:   linear-gradient(160deg, #0B1631 0%, #0F1D3D 55%, #14264F 100%);
 
   /* CSS-layer aliases (used by older components) */
@@ -393,14 +393,14 @@ body {
 }
 
 ::selection {
-  background: rgba(238, 202, 125, 0.45);
+  background: rgba(244,137,106, 0.45);
   color: var(--dmc-green-dark);
 }
 
 /* ── Page shell ─────────────────────────────────────────────────── */
 .cmg-page-shell {
   background:
-    radial-gradient(900px 320px at 100% 0%, rgba(238, 202, 125, 0.10), transparent 70%),
+    radial-gradient(900px 320px at 100% 0%, rgba(244,137,106, 0.10), transparent 70%),
     linear-gradient(180deg, #EEF2F9 0, var(--background) 260px),
     var(--background);
 }
@@ -415,7 +415,7 @@ body {
 /* ── Focus ring ─────────────────────────────────────────────────── */
 .cmg-focus { outline: none; }
 .cmg-focus:focus {
-  box-shadow: 0 0 0 3px rgba(190, 147, 73, 0.30);
+  box-shadow: 0 0 0 3px rgba(224,56,26, 0.30);
 }
 
 /* Any control that opts into Tailwind's blue focus ring gets the brand's
@@ -423,7 +423,7 @@ body {
 .focus\:ring-blue-500:focus,
 .focus\:ring-blue-400:focus,
 .focus\:ring-blue-600:focus {
-  --tw-ring-color: rgba(190, 147, 73, 0.45);
+  --tw-ring-color: rgba(224,56,26, 0.45);
 }
 
 /* ── Scrollbar ──────────────────────────────────────────────────── */
@@ -448,8 +448,8 @@ body {
    already anchor the ::after edge below. */
 .mi-sidebar {
   background:
-    radial-gradient(420px 260px at 0% 0%, rgba(238, 202, 125, 0.10), transparent 70%),
-    radial-gradient(360px 300px at 100% 100%, rgba(190, 147, 73, 0.08), transparent 70%),
+    radial-gradient(420px 260px at 0% 0%, rgba(244,137,106, 0.10), transparent 70%),
+    radial-gradient(360px 300px at 100% 100%, rgba(224,56,26, 0.08), transparent 70%),
     var(--mi-navy-gradient);
   color: #C9D3EA;
 }
@@ -460,7 +460,7 @@ body {
   position: absolute;
   inset: 0 0 0 auto;
   width: 1px;
-  background: linear-gradient(180deg, rgba(238, 202, 125, 0) 0%, rgba(238, 202, 125, 0.55) 30%, rgba(190, 147, 73, 0.15) 100%);
+  background: linear-gradient(180deg, rgba(244,137,106, 0) 0%, rgba(244,137,106, 0.55) 30%, rgba(224,56,26, 0.15) 100%);
   pointer-events: none;
 }
 
@@ -481,10 +481,10 @@ body {
   border: 0;
   border-radius: 4px;
 }
-.sidebar-nav::-webkit-scrollbar-thumb:hover { background: rgba(238, 202, 125, 0.55); }
+.sidebar-nav::-webkit-scrollbar-thumb:hover { background: rgba(244,137,106, 0.55); }
 
 .mi-nav-group {
-  color: rgba(238, 202, 125, 0.78);
+  color: rgba(244,137,106, 0.78);
   letter-spacing: 0.14em;
 }
 
@@ -497,7 +497,7 @@ body {
   color: #FFFFFF;
 }
 .mi-nav-link[aria-current="page"] {
-  background: linear-gradient(90deg, rgba(238, 202, 125, 0.18), rgba(238, 202, 125, 0.04));
+  background: linear-gradient(90deg, rgba(244,137,106, 0.18), rgba(244,137,106, 0.04));
   color: #FFFFFF;
   font-weight: 600;
 }
@@ -525,7 +525,7 @@ body {
 
 .mi-gold-rule {
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(190, 147, 73, 0.7), transparent);
+  background: linear-gradient(90deg, transparent, rgba(224,56,26, 0.7), transparent);
 }
 
 /* ══════════════════════════════════════════════════════════════════
@@ -533,7 +533,7 @@ body {
    ══════════════════════════════════════════════════════════════════ */
 .mi-login-panel {
   background:
-    radial-gradient(700px 520px at 78% 12%, rgba(238, 202, 125, 0.16), transparent 65%),
+    radial-gradient(700px 520px at 78% 12%, rgba(244,137,106, 0.16), transparent 65%),
     radial-gradient(560px 420px at 8% 92%, rgba(44, 74, 138, 0.55), transparent 70%),
     linear-gradient(155deg, #070E22 0%, #0B1631 42%, #0F1D3D 100%);
 }
@@ -573,7 +573,7 @@ body {
   position: absolute;
   inset: 0 auto 0 -60%;
   width: 45%;
-  background: linear-gradient(100deg, transparent, rgba(238, 202, 125, 0.45), transparent);
+  background: linear-gradient(100deg, transparent, rgba(244,137,106, 0.45), transparent);
   transform: skewX(-18deg);
   transition: none;
   pointer-events: none;

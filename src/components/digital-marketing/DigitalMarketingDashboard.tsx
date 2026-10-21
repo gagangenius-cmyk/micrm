@@ -38,7 +38,7 @@ const emptyMeta: MetaStats = {
   todayCount: 0, weekCount: 0, delivered: 0, failed: 0, pending: 0, campaignCounts: [],
 };
 
-const COLORS = ['#2C4A8A', '#16a34a', '#BE9349', '#dc2626', '#7c3aed', '#0891b2', '#db2777'];
+const COLORS = ['#2C4A8A', '#16a34a', '#E0381A', '#dc2626', '#7c3aed', '#0891b2', '#db2777'];
 
 function StatTile({
   label, value, icon: Icon, accent,

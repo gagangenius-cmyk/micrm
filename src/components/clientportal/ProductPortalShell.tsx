@@ -59,7 +59,7 @@ export default function ProductPortalShell({ children }: { children: React.React
   return (
     <div className="flex min-h-screen bg-slate-50">
       <div className="fixed inset-y-0 left-0 z-40 flex w-64 flex-col overflow-y-auto border-r border-slate-200 bg-white">
-        <div className="flex h-16 shrink-0 items-center border-b border-[#BE9349]/40 px-5">
+        <div className="flex h-16 shrink-0 items-center border-b border-[#E0381A]/40 px-5">
           <Image src="/logo-trimmed.png" alt="Migrantly.ae" width={1413} height={757} priority className="h-10 w-auto" />
           <span className="sr-only">Migrantly Client Portal</span>
         </div>

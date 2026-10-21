@@ -62,21 +62,21 @@ export function OrbitScene({ compact = false, busy = false }: OrbitSceneProps) {
     >
       <defs>
         <linearGradient id={id('gold')} gradientUnits="userSpaceOnUse" x1={CX - RX} y1="0" x2={CX + RX} y2="0">
-          <stop offset="0" stopColor="#9D6C2D" />
-          <stop offset="0.38" stopColor="#C29B58" />
-          <stop offset="0.66" stopColor="#EECA7D" />
-          <stop offset="1" stopColor="#BE9349" />
+          <stop offset="0" stopColor="#B8260F" />
+          <stop offset="0.38" stopColor="#E0381A" />
+          <stop offset="0.66" stopColor="#F4896A" />
+          <stop offset="1" stopColor="#E0381A" />
         </linearGradient>
         {/* the swoosh: full strength at the left, dissolving into the dark by the right, as in the logo */}
         <linearGradient id={id('swoosh')} gradientUnits="userSpaceOnUse" x1={CX - RX} y1="0" x2={CX + RX} y2="0">
           <stop offset="0" stopColor="#B98A3E" stopOpacity="0.95" />
-          <stop offset="0.45" stopColor="#EECA7D" stopOpacity="0.55" />
-          <stop offset="1" stopColor="#EECA7D" stopOpacity="0" />
+          <stop offset="0.45" stopColor="#F4896A" stopOpacity="0.55" />
+          <stop offset="1" stopColor="#F4896A" stopOpacity="0" />
         </linearGradient>
         <radialGradient id={id('halo')}>
-          <stop offset="0" stopColor="#EECA7D" stopOpacity="0.55" />
-          <stop offset="0.45" stopColor="#C29B58" stopOpacity="0.16" />
-          <stop offset="1" stopColor="#C29B58" stopOpacity="0" />
+          <stop offset="0" stopColor="#F4896A" stopOpacity="0.55" />
+          <stop offset="0.45" stopColor="#E0381A" stopOpacity="0.16" />
+          <stop offset="1" stopColor="#E0381A" stopOpacity="0" />
         </radialGradient>
         <filter id={id('glow')} x="-40%" y="-40%" width="180%" height="180%">
           <feGaussianBlur stdDeviation="3.2" result="b" />
@@ -95,7 +95,7 @@ export function OrbitScene({ compact = false, busy = false }: OrbitSceneProps) {
       </g>
 
       {/* concentric compass rings around the keyhole (upright, not tilted) */}
-      <g fill="none" stroke="#EECA7D" transform={`translate(${CX} ${CY})`}>
+      <g fill="none" stroke="#F4896A" transform={`translate(${CX} ${CY})`}>
         <circle r="214" strokeOpacity="0.10" strokeWidth="1" />
         <g className={reduceMotion ? undefined : 'mi-orbit-spin'}>
           <circle r="300" strokeOpacity="0.16" strokeWidth="1" strokeDasharray="2 9" strokeLinecap="round" />
@@ -124,7 +124,7 @@ export function OrbitScene({ compact = false, busy = false }: OrbitSceneProps) {
           const p = onOrbit(d.angle)
           return (
             <g key={d.id}>
-              <circle cx={p.x} cy={p.y} r="9" fill="none" stroke="#EECA7D" strokeOpacity="0.4" strokeWidth="1">
+              <circle cx={p.x} cy={p.y} r="9" fill="none" stroke="#F4896A" strokeOpacity="0.4" strokeWidth="1">
                 {!reduceMotion && (
                   <>
                     <animate attributeName="r" values="6;15;6" dur="3.6s" repeatCount="indefinite" begin={`${(d.angle % 7) * 0.4}s`} />
@@ -132,7 +132,7 @@ export function OrbitScene({ compact = false, busy = false }: OrbitSceneProps) {
                   </>
                 )}
               </circle>
-              <circle cx={p.x} cy={p.y} r="4.5" fill="#EECA7D" filter={`url(#${id('glow')})`} />
+              <circle cx={p.x} cy={p.y} r="4.5" fill="#F4896A" filter={`url(#${id('glow')})`} />
               {!compact && (
                 <g transform={`rotate(${-TILT} ${p.x} ${p.y})`}>
                   <text
@@ -157,9 +157,9 @@ export function OrbitScene({ compact = false, busy = false }: OrbitSceneProps) {
         {/* the paper-plane arrow from the logo, circling the keyhole */}
         <g filter={`url(#${id('glow')})`}>
           {reduceMotion ? (
-            <path d="M 17 0 L -13 -11 L -6 0 L -13 11 Z" fill="#F6DC9B" stroke="#BE9349" strokeWidth="0.8" strokeLinejoin="round" transform={`translate(${onOrbit(250).x} ${onOrbit(250).y}) rotate(20)`} />
+            <path d="M 17 0 L -13 -11 L -6 0 L -13 11 Z" fill="#F6DC9B" stroke="#E0381A" strokeWidth="0.8" strokeLinejoin="round" transform={`translate(${onOrbit(250).x} ${onOrbit(250).y}) rotate(20)`} />
           ) : (
-            <path d="M 17 0 L -13 -11 L -6 0 L -13 11 Z" fill="#F6DC9B" stroke="#BE9349" strokeWidth="0.8" strokeLinejoin="round">
+            <path d="M 17 0 L -13 -11 L -6 0 L -13 11 Z" fill="#F6DC9B" stroke="#E0381A" strokeWidth="0.8" strokeLinejoin="round">
               <animateMotion dur="16s" repeatCount="indefinite" rotate="auto">
                 <mpath href={`#${id('orbit')}`} />
               </animateMotion>
@@ -176,7 +176,7 @@ export function OrbitScene({ compact = false, busy = false }: OrbitSceneProps) {
           <path d="M -6.5 3.2 L -10 34 L 10 34 L 6.5 3.2" />
         </g>
         {!compact && (
-          <text y="86" textAnchor="middle" fontSize="12" fontWeight="600" letterSpacing="0.34em" fill="#EECA7D" fillOpacity="0.85">
+          <text y="86" textAnchor="middle" fontSize="12" fontWeight="600" letterSpacing="0.34em" fill="#F4896A" fillOpacity="0.85">
             DUBAI
           </text>
         )}

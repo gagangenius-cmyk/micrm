@@ -45,8 +45,8 @@ const PILLARS: { icon: LucideIcon; label: string }[] = [
 // Field outline: #8A96B0 is 3.2:1 on white (WCAG 1.4.11 asks for 3:1). Focus swaps it for a gold
 // border + halo and an error for a red one, so state never relies on a subtle colour shift alone.
 const FIELD_BASE =
-  'h-12 w-full rounded-xl border bg-white pl-11 text-[15px] text-[#131A2D] outline-none transition-[border-color,box-shadow] duration-150 placeholder:text-[#6F7A92] read-only:bg-[#F1F3F8] read-only:text-[#6F7A92]'
-const FIELD_IDLE = 'border-[#8A96B0] hover:border-[#5B678A] focus:border-[#BE9349] focus:ring-[3px] focus:ring-[#BE9349]/25'
+  'h-11 w-full rounded-xl border bg-white pl-11 text-[15px] text-[#131A2D] outline-none transition-[border-color,box-shadow] duration-150 placeholder:text-[#6F7A92] read-only:bg-[#F1F3F8] read-only:text-[#6F7A92]'
+const FIELD_IDLE = 'border-[#8A96B0] hover:border-[#5B678A] focus:border-[#E0381A] focus:ring-[3px] focus:ring-[#E0381A]/25'
 const FIELD_INVALID = 'border-[#C8302B] focus:border-[#C8302B] focus:ring-[3px] focus:ring-[#C8302B]/25'
 
 interface TextFieldProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'className'> {
@@ -61,14 +61,14 @@ interface TextFieldProps extends Omit<React.InputHTMLAttributes<HTMLInputElement
 function TextField({ id, label, icon: Icon, invalid = false, trailing, inputClassName = '', ...input }: TextFieldProps) {
   return (
     <div>
-      <label htmlFor={id} className="mb-2 block text-[13px] font-semibold text-[#131A2D]">
+      <label htmlFor={id} className="mb-1.5 block text-[13px] font-semibold text-[#131A2D]">
         {label}
       </label>
       <div className="group relative">
         <Icon
           aria-hidden="true"
           className={`pointer-events-none absolute left-4 top-1/2 h-[18px] w-[18px] -translate-y-1/2 transition-colors ${
-            invalid ? 'text-[#C8302B]' : 'text-[#6F7A92] group-focus-within:text-[#A47A33]'
+            invalid ? 'text-[#C8302B]' : 'text-[#6F7A92] group-focus-within:text-[#C42B12]'
           }`}
         />
         <input
@@ -88,17 +88,17 @@ function SubmitButton({ loading, idle, busy, disabled = false }: { loading: bool
     <button
       type="submit"
       disabled={loading || disabled}
-      className="mi-shimmer group relative flex h-12 w-full items-center justify-center gap-2 rounded-xl border border-[#EECA7D]/30 bg-[linear-gradient(135deg,#14264F_0%,#0F1D3D_100%)] text-[15px] font-semibold text-white shadow-[0_1px_2px_rgba(7,14,34,0.3),0_14px_26px_-14px_rgba(15,29,61,0.85)] transition duration-150 hover:border-[#EECA7D]/60 hover:shadow-[0_1px_2px_rgba(7,14,34,0.3),0_18px_30px_-14px_rgba(15,29,61,0.95)] focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-[#BE9349]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-white active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-70 disabled:active:scale-100"
+      className="mi-shimmer group relative flex h-11 w-full items-center justify-center gap-2 rounded-xl border border-[#F4896A]/30 bg-[linear-gradient(135deg,#14264F_0%,#0F1D3D_100%)] text-[15px] font-semibold text-white shadow-[0_1px_2px_rgba(7,14,34,0.3),0_14px_26px_-14px_rgba(15,29,61,0.85)] transition duration-150 hover:border-[#F4896A]/60 hover:shadow-[0_1px_2px_rgba(7,14,34,0.3),0_18px_30px_-14px_rgba(15,29,61,0.95)] focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-[#E0381A]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-white active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-70 disabled:active:scale-100"
     >
       {loading ? (
         <>
-          <LoaderCircle className="h-5 w-5 animate-spin text-[#EECA7D] motion-reduce:animate-none" aria-hidden="true" />
+          <LoaderCircle className="h-5 w-5 animate-spin text-[#F4896A] motion-reduce:animate-none" aria-hidden="true" />
           {busy}
         </>
       ) : (
         <>
           {idle}
-          <ArrowRight className="h-[18px] w-[18px] text-[#EECA7D] transition-transform duration-200 group-hover:translate-x-0.5" aria-hidden="true" />
+          <ArrowRight className="h-[18px] w-[18px] text-[#F4896A] transition-transform duration-200 group-hover:translate-x-0.5" aria-hidden="true" />
         </>
       )}
     </button>
@@ -241,44 +241,72 @@ export default function LoginForm() {
   ) : null
 
   return (
-    <main className="min-h-dvh bg-[#FBFAF7] text-[#131A2D] lg:grid lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]">
+    <main className="min-h-dvh bg-[#FBFAF7] text-[#131A2D] lg:grid lg:h-dvh lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:overflow-hidden">
+      {/* Desktop: the stage. A gold arrow circles the keyhole; the pitch sits beneath. */}
+      <aside className="mi-login-panel relative hidden flex-col overflow-hidden lg:flex">
+        <div className="mi-login-grain pointer-events-none absolute inset-0" aria-hidden="true" />
+        <div className="relative flex-[3]">
+          <OrbitScene busy={loading} />
+        </div>
+
+        <div className="relative z-10 flex flex-[2] flex-col justify-end px-14 pb-12 xl:px-16">
+          <p className="mb-4 text-xs font-semibold uppercase tracking-[0.24em] text-[#F4896A]">Migrantly CRM</p>
+          <h2 className="font-display max-w-lg text-balance text-4xl font-semibold leading-[1.08] text-white xl:text-[3.25rem]">
+            Your world, <span className="mi-gold-text">unlocked.</span>
+          </h2>
+          <p className="mt-4 max-w-md text-balance leading-relaxed text-[#C9D3EA]">
+            One workspace for every enquiry, client and case, from the first conversation to the final approval.
+          </p>
+          <ul className="mt-6 flex flex-wrap gap-2">
+            {PILLARS.map(({ icon: Icon, label }) => (
+              <li
+                key={label}
+                className="inline-flex items-center gap-2 rounded-full border border-[#F4896A]/25 bg-white/[0.06] px-3.5 py-1.5 text-[13px] font-medium text-white/90 backdrop-blur-sm"
+              >
+                <Icon className="h-4 w-4 text-[#F4896A]" aria-hidden="true" />
+                {label}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </aside>
       <section
-        className="relative flex min-h-dvh flex-col overflow-hidden"
+        className="relative flex min-h-dvh flex-col overflow-hidden lg:min-h-0"
         style={{
           backgroundImage:
-            'radial-gradient(520px 380px at 0% 100%, rgba(238,202,125,0.20), transparent 70%), radial-gradient(460px 340px at 100% 0%, rgba(20,38,79,0.06), transparent 70%)',
+            'radial-gradient(520px 380px at 0% 100%, rgba(244,137,106,0.20), transparent 70%), radial-gradient(460px 340px at 100% 0%, rgba(20,38,79,0.06), transparent 70%)',
         }}
       >
         {/* Phone: a short scene banner stands in for the stage panel */}
-        <div className="mi-login-panel relative h-36 shrink-0 overflow-hidden rounded-b-[2rem] lg:hidden">
+        <div className="mi-login-panel relative h-24 shrink-0 overflow-hidden rounded-b-[2rem] lg:hidden">
           <OrbitScene compact busy={loading} />
         </div>
 
-        <div className="relative flex flex-1 flex-col px-6 pb-8 pt-8 sm:px-12 lg:px-14 lg:pt-12 xl:px-20">
+        <div className="relative flex flex-1 flex-col px-6 pb-4 pt-3 sm:px-12 lg:px-12 lg:pt-6 xl:px-16">
           <header>
-            <Image src="/logo.png" alt="Migrantly.ae - Your world, unlocked." width={1600} height={1066} priority className="-mb-5 -ml-3 -mt-6 h-32 w-auto sm:-mb-6 sm:-mt-7 sm:h-40" />
+            <Image src="/logo-light-t.png" alt="Migrantly.ae - Your world, unlocked." width={1258} height={631} priority className="-mb-3 -ml-2 -mt-4 h-20 w-auto sm:h-24" />
           </header>
 
-          <div className="flex flex-1 items-center py-8">
+          <div className="flex flex-1 items-center py-3">
             <div className="mx-auto w-full max-w-[26rem]">
-              <motion.div key={mfaStep ? 'mfa-heading' : 'signin-heading'} {...rise(0)} className="mb-7">
-                <span className="mb-4 inline-flex items-center gap-1.5 rounded-full bg-[#BE9349]/[0.14] px-3 py-1 text-xs font-semibold text-[#7A5A22]">
+              <motion.div key={mfaStep ? 'mfa-heading' : 'signin-heading'} {...rise(0)} className="mb-4">
+                <span className="mb-2 inline-flex items-center gap-1.5 rounded-full bg-[#E0381A]/[0.14] px-3 py-1 text-xs font-semibold text-[#9E2410]">
                   {mfaStep ? <ShieldCheck className="h-3.5 w-3.5" aria-hidden="true" /> : <LockKeyhole className="h-3.5 w-3.5" aria-hidden="true" />}
                   {mfaStep ? 'Two-step verification' : 'Staff portal'}
                 </span>
-                <h1 className="font-display text-[2.5rem] font-semibold leading-[1.08] text-[#0F1D3D]">
+                <h1 className="font-display text-3xl font-semibold leading-tight text-[#0F1D3D]">
                   {mfaStep ? 'Enter your code' : 'Welcome back'}
                 </h1>
-                <p className="mt-3 text-balance leading-relaxed text-[#4D566B]">
+                <p className="mt-1.5 text-balance text-sm leading-snug text-[#4D566B]">
                   {mfaStep
                     ? 'Open your authenticator app and enter the 6-digit code. Lost your phone? Use one of your backup codes instead.'
                     : 'Sign in to continue to the Migrantly CRM.'}
                 </p>
               </motion.div>
 
-              <div className="relative rounded-2xl border border-[#E1E6EF] bg-white p-6 shadow-[0_24px_44px_-28px_rgba(15,29,61,0.45)] before:pointer-events-none before:absolute before:inset-x-8 before:top-0 before:h-px before:bg-[linear-gradient(90deg,transparent,#BE9349,transparent)] sm:p-7">
+              <div className="relative rounded-2xl border border-[#E1E6EF] bg-white p-5 shadow-[0_24px_44px_-28px_rgba(15,29,61,0.45)] before:pointer-events-none before:absolute before:inset-x-8 before:top-0 before:h-px before:bg-[linear-gradient(90deg,transparent,#E0381A,transparent)] sm:p-6">
                 {mfaStep ? (
-                  <form onSubmit={handleVerifyMfa} method="post" className="space-y-5" noValidate>
+                  <form onSubmit={handleVerifyMfa} method="post" className="space-y-4" noValidate>
                     <motion.div key="mfa-field" {...rise(1)}>
                       <TextField
                         id="mfaCode"
@@ -320,7 +348,7 @@ export default function LoginForm() {
                       <button
                         type="button"
                         onClick={backToSignIn}
-                        className="inline-flex items-center gap-1.5 rounded-md px-2 py-1 text-sm font-semibold text-[#14264F] transition-colors hover:text-[#A47A33] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#BE9349]/60"
+                        className="inline-flex items-center gap-1.5 rounded-md px-2 py-1 text-sm font-semibold text-[#14264F] transition-colors hover:text-[#C42B12] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E0381A]/60"
                       >
                         <ArrowLeft className="h-4 w-4" aria-hidden="true" />
                         Back to sign in
@@ -329,7 +357,7 @@ export default function LoginForm() {
                   </form>
                 ) : (
                   // method="post": if the form is submitted before JS has loaded, the browser must not put the password in the URL
-                  <form onSubmit={handleSubmit} method="post" className="space-y-5">
+                  <form onSubmit={handleSubmit} method="post" className="space-y-4">
                     <motion.div key="username" {...rise(1)}>
                       <TextField
                         id="username"
@@ -378,7 +406,7 @@ export default function LoginForm() {
                             onClick={() => setShowPassword((visible) => !visible)}
                             aria-label={showPassword ? 'Hide password' : 'Show password'}
                             aria-pressed={showPassword}
-                            className="absolute right-0.5 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-lg text-[#6F7A92] transition-colors hover:text-[#14264F] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#BE9349]/60"
+                            className="absolute right-0.5 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-lg text-[#6F7A92] transition-colors hover:text-[#14264F] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E0381A]/60"
                           >
                             {showPassword ? <EyeOff className="h-[18px] w-[18px]" aria-hidden="true" /> : <Eye className="h-[18px] w-[18px]" aria-hidden="true" />}
                           </button>
@@ -412,35 +440,6 @@ export default function LoginForm() {
           </footer>
         </div>
       </section>
-
-      {/* Desktop: the stage. A gold arrow circles the keyhole; the pitch sits beneath. */}
-      <aside className="mi-login-panel relative hidden flex-col overflow-hidden lg:flex">
-        <div className="mi-login-grain pointer-events-none absolute inset-0" aria-hidden="true" />
-        <div className="relative flex-[3]">
-          <OrbitScene busy={loading} />
-        </div>
-
-        <div className="relative z-10 flex flex-[2] flex-col justify-end px-14 pb-12 xl:px-16">
-          <p className="mb-4 text-xs font-semibold uppercase tracking-[0.24em] text-[#EECA7D]">Migrantly CRM</p>
-          <h2 className="font-display max-w-lg text-balance text-4xl font-semibold leading-[1.08] text-white xl:text-[3.25rem]">
-            Your world, <span className="mi-gold-text">unlocked.</span>
-          </h2>
-          <p className="mt-4 max-w-md text-balance leading-relaxed text-[#C9D3EA]">
-            One workspace for every enquiry, client and case, from the first conversation to the final approval.
-          </p>
-          <ul className="mt-6 flex flex-wrap gap-2">
-            {PILLARS.map(({ icon: Icon, label }) => (
-              <li
-                key={label}
-                className="inline-flex items-center gap-2 rounded-full border border-[#EECA7D]/25 bg-white/[0.06] px-3.5 py-1.5 text-[13px] font-medium text-white/90 backdrop-blur-sm"
-              >
-                <Icon className="h-4 w-4 text-[#EECA7D]" aria-hidden="true" />
-                {label}
-              </li>
-            ))}
-          </ul>
-        </div>
-      </aside>
     </main>
   )
 }

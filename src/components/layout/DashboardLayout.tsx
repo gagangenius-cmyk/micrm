@@ -437,10 +437,10 @@ const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
         <div className="mi-sidebar-brand flex items-center justify-between px-5 py-5 flex-shrink-0">
           <Link href="/admin" aria-label="Migrantly CRM home" className="flex min-w-0 flex-col items-start gap-2 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--dmc-gold-bright)]/60">
             <Image
-              src="/logo-light.png"
+              src="/logo-dark-t.png"
               alt="Migrantly.ae - Your world, unlocked."
-              width={1413}
-              height={757}
+              width={1077}
+              height={532}
               sizes="176px"
               priority
               className="h-auto w-44"
@@ -514,7 +514,7 @@ const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
       {/* Main content */}
       <div className="flex-1 flex flex-col min-w-0 min-h-0">
         {/* Top navigation */}
-        <header className="relative z-40 bg-white/90 backdrop-blur-md border-b border-[var(--cmg-border)] flex-shrink-0 after:pointer-events-none after:absolute after:inset-x-0 after:-bottom-px after:h-px after:bg-[linear-gradient(90deg,transparent,rgba(190,147,73,0.55)_18%,rgba(238,202,125,0.75)_50%,rgba(190,147,73,0.55)_82%,transparent)]">
+        <header className="relative z-40 bg-white/90 backdrop-blur-md border-b border-[var(--cmg-border)] flex-shrink-0 after:pointer-events-none after:absolute after:inset-x-0 after:-bottom-px after:h-px after:bg-[linear-gradient(90deg,transparent,rgba(224,56,26,0.55)_18%,rgba(244,137,106,0.75)_50%,rgba(224,56,26,0.55)_82%,transparent)]">
           <div className="flex items-center justify-between h-16 px-4 sm:px-6 lg:px-8">
             <div className="flex min-w-0 flex-1 items-center">
               <button
